@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url("fonts.css");
+
+body{
+    font-family: 'robotoregular';
+    font-size: 10pt;
+    color: #167395;
+    height: 100%;
+    background-color: #fff;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 20px;
+}
+
+h1{
+    font-family: 'robotothin';
+    color: #167395 !important;
+    font-size: 26pt !important;
+}
+
+h2{
+    font-family: 'robotothin';
+    color: #485362 !important;
+    font-size: 22pt !important;
+}
+
+.myInput{
+    border-radius: 0px !important;
+    border: solid 1px #47a6ae !important;
+    font-size: 10pt;
+    width: 220px;
+    height: 35px;
+}
+
+.myButton{
+    border-radius: 0px !important;
+    background-color: #485362;
+    color: #fff;
+    font-size: 10pt;
+    height: 35px;
+}
+
+.greenSection{
+    background-color: #acd373;
+    text-align: center;
+}
+
+.greenSection h2{
+    color: #000 !important;
+    font-family: 'robotolight' !important;
+}
+
+.halfTitle{
+    font-family: 'robotothin';
+    color: #167395 !important;
+    font-size: 26pt !important;
+    line-height: 38px;
+    margin-bottom: 15px;
+}
+
+.halfTitle b{
+    font-family: 'robotoblack';
+}
+
+.halfTitle span{
+    font-family: 'robotolight';
+    color: #000;
+}
+
+.loveTitle{
+    color: #e93449 !important;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.loveTitle span{
+    font-family: 'robotobold';
+}
+
+.expressLove{
+    position: absolute;
+    z-index: 100;
+    margin-top: -50px;
+    margin-left: 100px;
+}
+
+.expressLoveMobile{
+    position: absolute;
+    z-index: 100;
+    margin-top: -70px;
+    margin-left: 20px;
+}
+
+.footerList li{
+    font-size: 10pt;
+    height: 25px;
+    color: #555555;
+}
