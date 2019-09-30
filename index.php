@@ -1,14 +1,18 @@
+<?php
+    error_reporting(0);
+    include_once("config/connection.php");
+?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>WHERESERT</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bulma.css">
-    <link rel="stylesheet" href="css/website.css">
     <meta name="description" content="">
     <meta name="keywords" content="">
+    <?php include_once('scripts/headTags.php') ?>
 </head>
+
 <body>
 
     <!--Nav Starts-->
@@ -24,16 +28,21 @@
                         Welcome to the world of skilled, professionals, and handicraft users.
                     </h1>
 
-                    <div class="field has-addons">
-                        <div class="control">
-                            <input class="input myInput" type="text" placeholder="I am looking for...">
+                    <form name="myForm" id="myForm" method="POST">
+                        <div class="field has-addons">
+                            <div class="control">
+                                <input type="text" class="input myInput" name="txt_search" id="txt_search" placeholder="I am looking for...">
+                            </div>
+                            <div class="control">
+                                <button class="button myButton" id="btnFind">Find Now</button>
+                                <!--
+                                <a class="button myButton" id="btnFind">
+                                    Find Now
+                                </a>
+                                -->
+                            </div>
                         </div>
-                        <div class="control">
-                            <a class="button myButton">
-                                Find Now
-                            </a>
-                        </div>
-                    </div>
+                    </form>
 
                     <div class="is-hidden-desktop">
                         <img src="images/wheresert-search.png" />
@@ -45,17 +54,17 @@
                         </h2>
 
                         <div class="tags">
-                            <span class="tag is-success">One</span>
-                            <span class="tag is-success">Two</span>
-                            <span class="tag is-success">Three</span>
-                            <span class="tag is-success">Four</span>
-                            <span class="tag is-success">Five</span>
-                            <span class="tag is-success">Six</span>
-                            <span class="tag is-success">Seven</span>
-                            <span class="tag is-success">Eight</span>
-                            <span class="tag is-success">Nine</span>
-                            <span class="tag is-success">Ten</span>
-                            <span class="tag is-success">Eleven</span>
+                            <span class="tag is-success" find="<?=myEncode('Driver')?>">Driver</span>
+                            <span class="tag is-success" find="<?=myEncode('Doctor')?>">Doctor</span>
+                            <span class="tag is-success" find="<?=myEncode('Car Washer')?>">Car Washer</span>
+                            <span class="tag is-success" find="<?=myEncode('Painter')?>">Painter</span>
+                            <span class="tag is-success" find="<?=myEncode('Plumber')?>">Plumber</span>
+                            <span class="tag is-success" find="<?=myEncode('Cook')?>">Cook</span>
+                            <span class="tag is-success" find="<?=myEncode('Laundry Services at Home')?>">Laundry Services at Home</span>
+                            <span class="tag is-success" find="<?=myEncode('House Keeping Services')?>">House Keeping Services</span>
+                            <span class="tag is-success" find="<?=myEncode('Carpenter')?>">Carpenter</span>
+                            <span class="tag is-success" find="<?=myEncode('Baby Sitter')?>">Baby Sitter</span>
+                            <span class="tag is-success" find="<?=myEncode('Part-time Maid')?>">Part-time Maid</span>
                         </div>
 
                     </div>
@@ -212,19 +221,55 @@
     <!--Copyrights End-->
 
 
-    <script defer src="js/all.js"></script>
+    <?php include_once('scripts/bottomScripts.php') ?>
 
     <script>
-    (function(){
-        var burger=document.querySelector('.burger');
-        var nav=document.querySelector('#'+burger.dataset.target);
+        $(document).ready(function() {
 
-        burger.addEventListener('click', function(){
-            burger.classList.toggle('is-active');
-            nav.classList.toggle('is-active');
+            $("#btnFind").click(function() {
+                $.post("app/findProfile",
+                    $("#myForm").serialize(),
+                    function(data) {
+                        //alert(data);
+                        window.location.href = "searchList?LF=" + data;
+                    });
+                return false;
+            });
+
+
+            $('.tag').click(function() {
+                var lookingFor = $(this).attr('find');
+                //alert(lookingFor);
+                window.location.href = "searchList?LF=" + lookingFor;
+            });
+
+            /*
+
+            //Category Function
+            $('.mainCategory').click(function(){
+                var mainCatName=$(this).attr('mainCatID');
+                window.location.href="maincategory?ID="+mainCatName;
+            });
+
+            */
+
         });
-    })();
+
+    </script>
+
+    <script>
+        (function() {
+            var burger = document.querySelector('.burger');
+            var nav = document.querySelector('#' + burger.dataset.target);
+
+            burger.addEventListener('click', function() {
+                burger.classList.toggle('is-active');
+                nav.classList.toggle('is-active');
+            });
+        })();
+
     </script>
 
 </body>
+
 </html>

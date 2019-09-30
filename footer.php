@@ -47,9 +47,16 @@
                     <img src="images/iconInstragram.png" />
                     <img src="images/iconLinkedIn.png" />
                     <img src="images/iconTwitter.png" />
-                    <br/>
+                    <br />
                     <img src="images/iconWhatsApp.png" />
                     <img src="images/iconYouTube.png" />
+
+                    <hr />
+
+                    <span id="siteseal">
+                        <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=6vyD3muOGzac1dmvogl1LvUVwRjC1QYcsupND535kOnvkoDKDxUV3wW2x7vg"></script>
+                    </span>
+
                 </div>
             </div>
         </div>

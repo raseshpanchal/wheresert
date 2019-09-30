@@ -5,25 +5,25 @@
                 <img src="images/wheresert-logo.png" />
             </a>
 
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <img src="images/burger-menu.png" style="margin-left:15px; margin-top:15px" />
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" class="navbar-menu">
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-                <a class="button is-dark is-outlined">
-                    Join Now
-                </a>
-                <a class="button is-primary is-outlined">
-                    Sign In
-                </a>
-            </div>
-          </div>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarHome">
+                <img src="images/burger-menu.png" style="margin-left:15px; margin-top:15px" />
+            </a>
         </div>
-      </div>
+
+        <div id="navbarHome" class="navbar-menu">
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a href="wheresert-sign-up" class="button is-dark is-outlined">
+                            Join Now
+                        </a>
+                        <a href="wheresert-sign-in" class="button is-primary is-outlined" href="wheresert-sign-up">
+                            Sign In
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </nav>
 </div>

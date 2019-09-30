@@ -3,7 +3,7 @@
 
 @import url("fonts.css");
 
-body{
+body {
     font-family: 'robotoregular';
     font-size: 10pt;
     color: #167395;
@@ -14,19 +14,45 @@ body{
     padding-top: 20px;
 }
 
-h1{
+::placeholder {
+    color: #333;
+    opacity: 1;
+    /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #333;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #333;
+}
+
+h1 {
     font-family: 'robotothin';
     color: #167395 !important;
     font-size: 26pt !important;
 }
 
-h2{
+h2 {
     font-family: 'robotothin';
     color: #485362 !important;
     font-size: 22pt !important;
 }
 
-.myInput{
+h3 {
+    font-family: 'robotolight';
+    color: #167395 !important;
+    font-size: 16pt !important;
+}
+
+.tag:hover {
+    cursor: pointer;
+}
+
+.myInput {
     border-radius: 0px !important;
     border: solid 1px #47a6ae !important;
     font-size: 10pt;
@@ -34,7 +60,14 @@ h2{
     height: 35px;
 }
 
-.myButton{
+.customInput {
+    border-radius: 0px !important;
+    border: solid 1px #47a6ae !important;
+    font-size: 10pt;
+    height: 35px;
+}
+
+.myButton {
     border-radius: 0px !important;
     background-color: #485362;
     color: #fff;
@@ -42,17 +75,17 @@ h2{
     height: 35px;
 }
 
-.greenSection{
+.greenSection {
     background-color: #acd373;
     text-align: center;
 }
 
-.greenSection h2{
+.greenSection h2 {
     color: #000 !important;
     font-family: 'robotolight' !important;
 }
 
-.halfTitle{
+.halfTitle {
     font-family: 'robotothin';
     color: #167395 !important;
     font-size: 26pt !important;
@@ -60,41 +93,55 @@ h2{
     margin-bottom: 15px;
 }
 
-.halfTitle b{
+.halfTitle b {
     font-family: 'robotoblack';
 }
 
-.halfTitle span{
+.halfTitle span {
     font-family: 'robotolight';
     color: #000;
 }
 
-.loveTitle{
+.loveTitle {
     color: #e93449 !important;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.loveTitle span{
+.loveTitle span {
     font-family: 'robotobold';
 }
 
-.expressLove{
+.expressLove {
     position: absolute;
     z-index: 100;
     margin-top: -50px;
     margin-left: 100px;
 }
 
-.expressLoveMobile{
+.expressLoveMobile {
     position: absolute;
     z-index: 100;
     margin-top: -70px;
     margin-left: 20px;
 }
 
-.footerList li{
+.footerList li {
     font-size: 10pt;
     height: 25px;
     color: #555555;
+}
+
+.writingPad {
+    background-image: url(../images/writingPad.png);
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+
+.writingPad label {
+    font-size: 10pt;
+}
+
+.formSpace {
+    margin-bottom: 15px;
 }
