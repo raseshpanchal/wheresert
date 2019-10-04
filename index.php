@@ -77,7 +77,7 @@
                             <h2 class="subtitle">
                                 Join Comminuty
                             </h2>
-                            <a href="#" class="button is-primary is-outlined">
+                            <a href="wheresert-sign-up" class="button is-primary is-outlined">
                                 Join Now
                             </a>
                         </div>
@@ -127,7 +127,7 @@
                             <h2 class="halfTitle">
                                 Get connected and find people you know
                             </h2>
-                            <a href="#" class="button is-danger is-outlined">
+                            <a href="wheresert-sign-up" class="button is-danger is-outlined">
                                 Know More
                             </a>
                         </div>
@@ -182,7 +182,7 @@
             </div>
             <div class="columns is-mobile">
                 <div class="column is-12" style="text-align:center">
-                    <a href="#" class="button is-medium is-danger is-outlined">
+                    <a href="wheresert-sign-up" class="button is-medium is-danger is-outlined">
                         Know More
                     </a>
                 </div>
