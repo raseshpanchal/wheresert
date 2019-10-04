@@ -41,42 +41,46 @@
 
                 <div class="column writingPad">
 
-                    <div class="columns" style="margin-top:70px; height: 617px;">
-                        <div class="column is-3"></div>
-                        <div class="column" style="text-align:center">
-                            <h1 class="formSpace">User Login</h1>
+                    <form name="myFormLogin" id="myFormLogin" method="POST">
+                        <div class="columns" style="margin-top:70px; height: 617px;">
+                            <div class="column is-3"></div>
+                            <div class="column" style="text-align:center">
+                                <h1 class="formSpace">User Login</h1>
 
-                            <div class="control formSpace">
-                                <label class="radio">
-                                    <input type="radio" name="userRegi" checked>
-                                    I CAN HELP
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="userRegi">
-                                    I NEED HELP
-                                </label>
+                                <div class="control formSpace">
+                                    <label class="radio">
+                                        <input type="radio" name="txt_userType" id="txt_userType" value="Freelancer" checked>
+                                        I CAN HELP
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="txt_userType" id="txt_userType" value="Recruiter">
+                                        I NEED HELP
+                                    </label>
+                                </div>
+
+                                <p>
+                                    <input class="input customInput formSpace" name="txt_user" id="txt_user" type="text" placeholder="Email ID OR Mobile Number">
+                                </p>
+
+                                <p>
+                                    <input class="input customInput formSpace" name="txt_pass" id="txt_pass" type="password" placeholder="Enter Password">
+                                </p>
+
+                                <div class="control formSpace">
+                                    <button class="button is-primary is-outlined btnLogin" style="width:100%">Login</button>
+                                    <br /><br />
+                                    <span id="loginStatus"></span>
+                                </div>
+
+                                <p style="text-align:right">
+                                    Login Problem? <a href="wheresert-login-problem">Click Here</a>
+                                </p>
+
+
                             </div>
-
-                            <p>
-                                <input class="input customInput formSpace" name="txt_username" id="txt_username" type="text" placeholder="Email ID OR Mobile Number">
-                            </p>
-
-                            <p>
-                                <input class="input customInput formSpace" name="txt_pass" id="txt_pass" type="password" placeholder="Enter Password">
-                            </p>
-
-                            <div class="control formSpace">
-                                <button class="button is-primary is-outlined" style="width:100%" id="btnRegi">Login</button>
-                            </div>
-
-                            <p style="text-align:right">
-                                Login Problem? Click Here
-                            </p>
-
-
+                            <div class="column is-3"></div>
                         </div>
-                        <div class="column is-3"></div>
-                    </div>
+                    </form>
 
 
 
@@ -149,7 +153,7 @@
                 <h1 class="loveTitle">
                     If you <span>love</span> us then don’t forget to <span>express</span> it!
                 </h1>
-                <a href="#" class="button is-medium is-danger is-outlined">
+                <a href="wheresert-motivate-us" class="button is-medium is-danger is-outlined">
                     Motivate Us
                 </a>
             </div>
@@ -185,16 +189,112 @@
                 return false;
             });
 
-            /*
+            //Login Script Starts
+            $('.btnLogin').click(function() {
+                var userType = $("input[name='txt_userType']:checked").val();
+                $('.btnLogin').attr("disabled", true);
+                $('#loginStatus').html('Please wait...').fadeIn(300);
+                var myUser = $('#txt_user').val();
+                var myPass = $('#txt_pass').val();
 
-            //Category Function
-            $('.mainCategory').click(function(){
-                var mainCatName=$(this).attr('mainCatID');
-                window.location.href="maincategory?ID="+mainCatName;
+                if (userType == 'Freelancer') {
+                    if (myUser != '') {
+                        if (myPass == '') {
+                            $('#loginStatus').html('<span style="color:red">Enter Password</span>');
+                            $('#txt_pass').val('');
+                            $('.btnLogin').attr("disabled", false);
+                        } else {
+                            $.post("app/freelancerLoginEntry",
+                                $("#myFormLogin").serialize(),
+                                function(data) {
+                                    if (data == 'emailError') {
+                                        $('#loginStatus').html('<span style="color:red">Wrong Email ID</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        $('.btnLogin').attr("disabled", false);
+                                    }
+                                    if (data == 'mobileError') {
+                                        $('#loginStatus').html('<span style="color:red">Wrong Mobile Number</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        $('.btnLogin').attr("disabled", false);
+                                    } else if (data == 'validationError') {
+                                        $('#loginStatus').html('<span style="color:red">Please Validate Your Account Before Login</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        $('.btnLogin').attr("disabled", false);
+                                    } else if (data == 'passwordError') {
+                                        $('#loginStatus').html('<span style="color:red">Wrong Password</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        $('.btnLogin').attr("disabled", false);
+                                    } else if (data == 'validWizard') {
+                                        $('#loginStatus').html('<span style="color:green">Account Athenticated. Please wait...</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        window.location.href = 'freelancer-registration-process';
+                                    } else if (data == 'validUser') {
+                                        $('#loginStatus').html('<span style="color:green">Account Athenticated. Please wait...</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        window.location.href = 'myAccount';
+                                        //history.back(-1);
+                                    }
+
+                                });
+                            return false;
+                        }
+                    } else {
+                        $('#regiStatus').html('<span style="color:red">Enter Email OR Mobile Number</span>');
+                        $('#txt_user').val('');
+                        $('.btnLogin').attr("disabled", false);
+                    }
+                } else if (userType == 'Recruiter') {
+                    if (validateEmail(myEmail) != '') {
+                        if (myPass == '') {
+                            $('#loginStatus').html('<span style="color:red">Enter Password</span>');
+                            $('#txt_pass').val('');
+                            $('.btnLogin').attr("disabled", false);
+                        } else {
+                            $.post("app/recruiterLoginEntry",
+                                $("#myFormLogin").serialize(),
+                                function(data) {
+                                    if (data == 'emailError') {
+                                        $('#loginStatus').html('<span style="color:red">Wrong Email ID</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        $('.btnLogin').attr("disabled", false);
+                                    } else if (data == 'validationError') {
+                                        $('#loginStatus').html('<span style="color:red">Please Validate Your Email ID Before Login</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        $('.btnLogin').attr("disabled", false);
+                                    } else if (data == 'passwordError') {
+                                        $('#loginStatus').html('<span style="color:red">Wrong Password</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        $('.btnLogin').attr("disabled", false);
+                                    } else if (data == 'validUser') {
+                                        $('#loginStatus').html('<span style="color:green">Account Athenticated. Please wait...</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        window.location.href = './';
+                                    }
+                                });
+                            return false;
+                        }
+                    } else {
+                        $('#regiStatus').text('Please Enter Valid User Name');
+                        $('#txt_user').val('');
+                        $('.btnLogin').attr("disabled", false);
+                    }
+                }
+                return false;
             });
+            //Login Script Ends
 
-            */
 
+            //////MAIN ENDS
         });
 
     </script>
