@@ -88,121 +88,95 @@
 
                 </div>
                 <div class="column writingPad">
-                    <form name="myRegiForm" id="myRegiForm" method="POST">
-                        <div class="columns" style="margin-top:70px; height: 617px;">
-                            <div class="column is-3"></div>
-                            <div class="column" style="text-align:center">
-                                <h1 class="formSpace">Sign Up Form</h1>
 
-                                <div class="control formSpace">
-                                    <label class="radio">
-                                        <input type="radio" name="userRegi" id="userRegi" value="Freelancer" checked>
-                                        I CAN HELP
-                                    </label>
-                                    <label class="radio">
-                                        <input type="radio" name="userRegi" id="userRegi" value="Recruiter">
-                                        I NEED HELP
-                                    </label>
+                    <div class="columns" style="margin-top:70px; height: 617px;">
+                        <div class="column is-3"></div>
+                        <div class="column" style="text-align:center">
+                            <h1 class="formSpace">Sign Up Form</h1>
+
+                            <div class="control formSpace">
+                                <label class="radio">
+                                    <input type="radio" name="userRegi" checked>
+                                    I CAN HELP
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="userRegi">
+                                    I NEED HELP
+                                </label>
+                            </div>
+
+                            <p>
+                                <input class="input customInput formSpace" name="txt_fname" id="txt_fname" type="text" placeholder="First Name *">
+                            </p>
+
+                            <p>
+                                <input class="input customInput formSpace" name="txt_lname" id="txt_lname" type="text" placeholder="Last Name *">
+                            </p>
+
+                            <p>
+                                <input class="input customInput formSpace" name="txt_username" id="txt_username" type="text" placeholder="Email ID OR Mobile Number *">
+                            </p>
+
+                            <p>
+                                <input class="input customInput formSpace" name="txt_pass" id="txt_pass" type="password" placeholder="Set Password *">
+                            </p>
+
+                            <div class="formSpace">
+                                <label>
+                                    Birthday
+                                </label>
+
+                                <div class="select">
+                                    <select>
+                                        <option>DD</option>
+                                        <option>01</option>
+                                    </select>
                                 </div>
 
-                                <p>
-                                    <input class="input customInput formSpace" name="txt_fname" id="txt_fname" type="text" placeholder="First Name *">
-                                </p>
-
-                                <p>
-                                    <input class="input customInput formSpace" name="txt_lname" id="txt_lname" type="text" placeholder="Last Name *">
-                                </p>
-
-                                <p>
-                                    <input class="input customInput formSpace" name="txt_contact" id="txt_contact" type="text" placeholder="Email ID OR Mobile Number *">
-                                </p>
-
-                                <p>
-                                    <input class="input customInput formSpace" name="txt_pass" id="txt_pass" type="password" placeholder="Set Password *">
-                                </p>
-
-                                <div class="formSpace">
-                                    <label>
-                                        Birthday
-                                    </label>
-
-                                    <div class="select">
-                                        <select id="myDate" name="myDate">
-                                            <?php
-                                            for($i = 1; $i <= 31; $i++)
-                                            {
-                                                echo '<option value="' .$i.'">' .$i.'</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-
-                                    <div class="select">
-                                        <select id="myMonth" name="myMonth">
-                                            <?php
-                                        for($i = 1; $i <= 12; $i++)
-                                        {
-                                            echo '<option value="'.$i.'">' .$i.'</option>';
-                                        }
-                                        ?>
-                                        </select>
-                                    </div>
-
-                                    <div class="select">
-                                        <select id="myYear" name="myYear">
-                                            <?php
-                                            for($i = 1900; $i < date("Y")+1; $i++)
-                                            {
-                                                ?>
-                                            <option value="<?=$i?>" <?php
-                                                    if($i=='2003')
-                                                    {
-                                                        echo 'selected';
-                                                    }
-                                                    ?>>
-                                                <?=$i?>
-                                            </option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
+                                <div class="select">
+                                    <select>
+                                        <option>DD</option>
+                                        <option>01</option>
+                                    </select>
                                 </div>
 
-                                <div class="control formSpace">
-                                    <label>
-                                        Gender&nbsp;&nbsp;
-                                    </label>
-
-                                    <label class="radio">
-                                        <input type="radio" name="userGender" id="userGender" value="Male" checked>
-                                        Male
-                                    </label>
-                                    <label class="radio">
-                                        <input type="radio" name="userGender" id="userGender" value="Female">
-                                        Female
-                                    </label>
-                                    <label class="radio">
-                                        <input type="radio" name="userGender" id="userGender" value="Other">
-                                        Other
-                                    </label>
+                                <div class="select">
+                                    <select>
+                                        <option>YYYY</option>
+                                        <option>01</option>
+                                    </select>
                                 </div>
-
-                                <div class="control">
-                                    <button class="button is-primary is-outlined" id="btnRegi" style="width:100%">Submit</button>
-                                </div>
-                                
-                                <div class="columns" style="margin-top:10px;">
-                                    <div class="column">
-                                        <span id="alert"></span>
-                                    </div>
-                                </div>
-                                
 
                             </div>
-                            <div class="column is-3">123</div>
+
+                            <div class="control formSpace">
+                                <label>
+                                    Gender&nbsp;&nbsp;
+                                </label>
+
+                                <label class="radio">
+                                    <input type="radio" name="userGender" checked>
+                                    Male
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="userGender">
+                                    Female
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="userGender">
+                                    Other
+                                </label>
+                            </div>
+
+                            <div class="control">
+                                <button class="button is-primary is-outlined" style="width:100%" id="btnRegi">Submit</button>
+                            </div>
+
+
                         </div>
-                    </form>
+                        <div class="column is-3"></div>
+                    </div>
+
 
 
                 </div>
@@ -257,81 +231,16 @@
                 return false;
             });
 
-            //Submit Expression
-            $("#btnRegi").click(function() {
-                var userType = $("input[name='userRegi']:checked").val();
-                var myGender = $("input[name='userGender']:checked").val();
-                var newDate = $('#myDate option:selected').val();
-                var newMonth = $('#myMonth option:selected').val();
-                var newYear = $('#myYear option:selected').val();
+            /*
 
-                if (userType == 'Freelancer') {
-                    $.post("app/userSignUpEntry?DD=" + newDate + "&MM=" + newMonth + "&YY=" + newYear,
-                        $("#myRegiForm").serialize(),
-                        function(data) {
-                                                        
-                            if (data == 'NameEmptyErr') {
-                                $('#alert').text('Please Enter Your First Name');
-                                $('#txt_fname').val('');
-                            } else if (data == 'NameNumberErr') {
-                                $('#alert').text('Please Enter Only Alphabets');
-                                $('#txt_fname').val('');
-                            } else if (data == 'ContactEmptyErr') {
-                                $('#alert').text('Enter either Email OR Mobile');
-                                $('#txt_contact').val('');
-                            } else if (data == 'ContactMobileErr') {
-                                $('#alert').text('Please Check Email ID');
-                            } else if (data == 'ContactEmailErr') {
-                                $('#alert').text('Please Check Email ID');
-                            } else if (data == '1') {
-                                $('#alert').text('Form Submitted Successfully!');
-                                $('#txt_fname').val('');
-                                $('#txt_lname').val('');
-                                $('#txt_contact').val('');
-                                $('#txt_pass').val('');
-                            } else if (data == '0') {
-                                $('#alert').text('Please check connection!');
-                            }
-
-                            return false;
-                            //window.location.href = "searchList?LF=" + data;
-                        });
-                    return false;
-                } else if (userType == 'Recruiter') {
-                    $.post("app/recruiterRegiEntry?DD=" + newDate + "&MM=" + newMonth + "&YY=" + newYear,
-                        $("#myRegiForm").serialize(),
-                        function(data) {
-                                                        
-                            if (data == 'NameEmptyErr') {
-                                $('#alert').text('Please Enter Your First Name');
-                                $('#txt_fname').val('');
-                            } else if (data == 'NameNumberErr') {
-                                $('#alert').text('Please Enter Only Alphabets');
-                                $('#txt_fname').val('');
-                            } else if (data == 'ContactEmptyErr') {
-                                $('#alert').text('Enter either Email OR Mobile');
-                                $('#txt_contact').val('');
-                            } else if (data == 'ContactMobileErr') {
-                                $('#alert').text('Please Check Email ID');
-                            } else if (data == 'ContactEmailErr') {
-                                $('#alert').text('Please Check Email ID');
-                            } else if (data == '1') {
-                                $('#alert').text('Form Submitted Successfully!');
-                                $('#txt_fname').val('');
-                                $('#txt_lname').val('');
-                                $('#txt_contact').val('');
-                                $('#txt_pass').val('');
-                            } else if (data == '0') {
-                                $('#alert').text('Please check connection!');
-                            }
-
-                            return false;
-                            //window.location.href = "searchList?LF=" + data;
-                        });
-                    return false;
-                }
-
+            //Category Function
+            $('.mainCategory').click(function(){
+                var mainCatName=$(this).attr('mainCatID');
+                window.location.href="maincategory?ID="+mainCatName;
             });
+
+            */
+
         });
 
     </script>
@@ -339,4 +248,5 @@
     <script src="js/mobileMenu.js"></script>
 
 </body>
+
 </html>
