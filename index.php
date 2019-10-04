@@ -200,7 +200,7 @@
                 <h1 class="loveTitle">
                     If you <span>love</span> us then don’t forget to <span>express</span> it!
                 </h1>
-                <a href="#" class="button is-medium is-danger is-outlined">
+                <a href="whereser-motivate-us" class="button is-medium is-danger is-outlined">
                     Motivate Us
                 </a>
             </div>
