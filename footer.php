@@ -5,51 +5,51 @@
                 <div class="column">
                     <ul class="footerList">
                         <li><b>WhereSert</b></li>
-                        <li>Sign-up</li>
-                        <li>About</li>
-                        <li>Press</li>
-                        <li>Blog</li>
-                        <li>Careers</li>
+                        <li><a href="wheresert-sign-up.php">Sign-up</a></li>
+                        <li><a href="wheresert-about.php">About</a></li>
+                        <li><a href="wheresert-press.php">Press</a></li>
+                        <li><a href="wheresert-blog.php">Blog</a></li>
+                        <li><a href="wheresert-careers.php">Careers</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <ul class="footerList">
                         <li><b>Legal</b></li>
-                        <li>Terms &amp; Conditions</li>
-                        <li>Privacy Policy</li>
-                        <li>Cookies Policy</li>
-                        <li>Brand Policy</li>
-                        <li>Copyrights Notifications</li>
-                        <li>Community Guidelines</li>
+                        <li><a href="wheresert-terms-and-conditions.php">Terms &amp; Conditions</a></li>
+                        <li><a href="wheresert-privacy-policy.php">Privacy Policy</a></li>
+                        <li><a href="wheresert-cookies-policy.php">Cookies Policy</a></li>
+                        <li><a href="wheresert-brand-policy.php">Brand Policy</a></li>
+                        <li><a href="wheresert-copyrights-notifications.php">Copyrights Notifications</a></li>
+                        <li><a href="wheresert-community-guidelines.php">Community Guidelines</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <ul class="footerList">
                         <li><b>Business Solutions</b></li>
-                        <li>Talents</li>
-                        <li>Marketing</li>
-                        <li>Sales</li>
+                        <li><a href="wheresert-talents.php">Talents</a></li>
+                        <li><a href="wheresert-marketing.php">Marketing</a></li>
+                        <li><a href="wheresert-sales.php">Sales</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <ul class="footerList">
                         <li><b>Directories</b></li>
-                        <li>Members</li>
-                        <li>Jobs</li>
-                        <li>Companies</li>
-                        <li>Salaries</li>
-                        <li>Featured</li>
+                        <li><a href="wheresert-members.php">Members</a></li>
+                        <li><a href="wheresert-jobs.php">Jobs</a></li>
+                        <li><a href="wheresert-companies.php">Companies</a></li>
+                        <li><a href="wheresert-salaries.php">Salaries</a></li>
+                        <li><a href="wheresert-featured.php">Featured</a></li>
                     </ul>
                 </div>
                 <div class="column is-3">
                     <h4 style="margin-bottom:10px;"><b>Connect with us</b></h4>
-                    <img src="images/iconFacebook.png" />
-                    <img src="images/iconInstragram.png" />
-                    <img src="images/iconLinkedIn.png" />
-                    <img src="images/iconTwitter.png" />
+                    <a href="#"><img src="images/iconFacebook.png" /></a>
+                    <a href="#"><img src="images/iconInstragram.png" /></a>
+                    <a href="#"><img src="images/iconLinkedIn.png" /></a>
+                    <a href="#"><img src="images/iconTwitter.png" /></a>
                     <br />
-                    <img src="images/iconWhatsApp.png" />
-                    <img src="images/iconYouTube.png" />
+                    <a href="#"><img src="images/iconWhatsApp.png" /></a>
+                    <a href="#"><img src="images/iconYouTube.png" /></a>
 
                     <hr />
 
