@@ -51,7 +51,7 @@
                     $userYY=$_GET['YY'];
                     $userBOD=$userDD.'/'.$userMM.'/'.$userYY;
                     //Insert Into DB
-                    $query_1=mysqli_query($link, "INSERT INTO freelancer_registration SET FirstName='$myFirstName', LastName='$myLastName', EmailMobile='$myContact', DOB='$userBOD', Gender='$myGender', Password='$myPassword', CreateDate=now(), CreateTime=now(), PaidPhoto='No', PaidBanners='No', PaidListing='No', Status='New'");
+                    $query_1=mysqli_query($link, "INSERT INTO freelancer_registration SET FirstName='$myFirstName', LastName='$myLastName', Mobile='$myContact', DOB='$userBOD', Gender='$myGender', Password='$myPassword', CreateDate=now(), CreateTime=now(), PaidPhoto='No', PaidBanners='No', PaidListing='No', Status='New'");
                     if($query_1)
                     {
                         echo '1';
@@ -81,7 +81,7 @@
                     $userYY=$_GET['YY'];
                     $userBOD=$userDD.'/'.$userMM.'/'.$userYY;
                     //Insert Into DB
-                    $query_1=mysqli_query($link, "INSERT INTO freelancer_registration SET FirstName='$myFirstName', LastName='$myLastName', EmailMobile='$myContact', DOB='$userBOD', Gender='$myGender', Password='$myPassword', CreateDate=now(), CreateTime=now(), PaidPhoto='No', PaidBanners='No', PaidListing='No', Status='New'");
+                    $query_1=mysqli_query($link, "INSERT INTO freelancer_registration SET FirstName='$myFirstName', LastName='$myLastName', EmailID='$myContact', DOB='$userBOD', Gender='$myGender', Password='$myPassword', CreateDate=now(), CreateTime=now(), PaidPhoto='No', PaidBanners='No', PaidListing='No', Status='New'");
                     if($query_1)
                     {
                         echo '1';
