@@ -278,7 +278,7 @@
                     return false;
                 } else {
                     if (userType == 'Freelancer') {
-                        $.post("app/userSignUpEntry?DD=" + newDate + "&MM=" + newMonth + "&YY=" + newYear,
+                        $.post("app/freelancerRegiEntry?DD=" + newDate + "&MM=" + newMonth + "&YY=" + newYear,
                             $("#myRegiForm").serialize(),
                             function(data) {
                                 //alert(data);
