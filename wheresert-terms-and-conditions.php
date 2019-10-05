@@ -119,8 +119,13 @@
         </div>
     </section>
 
+    <!--Footer Starts-->
+    <?php include_once('footer.php'); ?>
+    <!--Footer Ends-->
 
-    <?php include_once('footer.php') ?>
+    <!--Copyrights Start-->
+    <?php include_once('copyrights.php'); ?>
+    <!--Copyrights End-->
 
 
 
