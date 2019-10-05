@@ -191,16 +191,16 @@
                                 <div class="control">
                                     <button class="button is-primary is-outlined" id="btnRegi" style="width:100%">Submit</button>
                                 </div>
-                                
+
                                 <div class="columns" style="margin-top:10px;">
                                     <div class="column">
                                         <span id="alert"></span>
                                     </div>
                                 </div>
-                                
+
 
                             </div>
-                            <div class="column is-3">123</div>
+                            <div class="column is-3"></div>
                         </div>
                     </form>
 
@@ -259,79 +259,106 @@
 
             //Submit Expression
             $("#btnRegi").click(function() {
+
+                $('#alert').text('');
+
                 var userType = $("input[name='userRegi']:checked").val();
                 var myGender = $("input[name='userGender']:checked").val();
                 var newDate = $('#myDate option:selected').val();
                 var newMonth = $('#myMonth option:selected').val();
                 var newYear = $('#myYear option:selected').val();
 
-                if (userType == 'Freelancer') {
-                    $.post("app/userSignUpEntry?DD=" + newDate + "&MM=" + newMonth + "&YY=" + newYear,
-                        $("#myRegiForm").serialize(),
-                        function(data) {
-                                                        
-                            if (data == 'NameEmptyErr') {
-                                $('#alert').text('Please Enter Your First Name');
-                                $('#txt_fname').val('');
-                            } else if (data == 'NameNumberErr') {
-                                $('#alert').text('Please Enter Only Alphabets');
-                                $('#txt_fname').val('');
-                            } else if (data == 'ContactEmptyErr') {
-                                $('#alert').text('Enter either Email OR Mobile');
-                                $('#txt_contact').val('');
-                            } else if (data == 'ContactMobileErr') {
-                                $('#alert').text('Please Check Email ID');
-                            } else if (data == 'ContactEmailErr') {
-                                $('#alert').text('Please Check Email ID');
-                            } else if (data == '1') {
-                                $('#alert').text('Form Submitted Successfully!');
-                                $('#txt_fname').val('');
-                                $('#txt_lname').val('');
-                                $('#txt_contact').val('');
-                                $('#txt_pass').val('');
-                            } else if (data == '0') {
-                                $('#alert').text('Please check connection!');
-                            }
+                var fname = $('#txt_fname').val();
+                var lname = $('#txt_lname').val();
+                var contact = $('#txt_contact').val();
+                var pass = $('#txt_pass').val();
 
-                            return false;
-                            //window.location.href = "searchList?LF=" + data;
-                        });
+                if (fname == '' || lname == '' || contact == '' || pass == '') {
+                    $('#alert').text('All fields are mandatory');
                     return false;
-                } else if (userType == 'Recruiter') {
-                    $.post("app/recruiterRegiEntry?DD=" + newDate + "&MM=" + newMonth + "&YY=" + newYear,
-                        $("#myRegiForm").serialize(),
-                        function(data) {
-                                                        
-                            if (data == 'NameEmptyErr') {
-                                $('#alert').text('Please Enter Your First Name');
-                                $('#txt_fname').val('');
-                            } else if (data == 'NameNumberErr') {
-                                $('#alert').text('Please Enter Only Alphabets');
-                                $('#txt_fname').val('');
-                            } else if (data == 'ContactEmptyErr') {
-                                $('#alert').text('Enter either Email OR Mobile');
-                                $('#txt_contact').val('');
-                            } else if (data == 'ContactMobileErr') {
-                                $('#alert').text('Please Check Email ID');
-                            } else if (data == 'ContactEmailErr') {
-                                $('#alert').text('Please Check Email ID');
-                            } else if (data == '1') {
-                                $('#alert').text('Form Submitted Successfully!');
-                                $('#txt_fname').val('');
-                                $('#txt_lname').val('');
-                                $('#txt_contact').val('');
-                                $('#txt_pass').val('');
-                            } else if (data == '0') {
-                                $('#alert').text('Please check connection!');
-                            }
+                } else {
+                    if (userType == 'Freelancer') {
+                        $.post("app/userSignUpEntry?DD=" + newDate + "&MM=" + newMonth + "&YY=" + newYear,
+                            $("#myRegiForm").serialize(),
+                            function(data) {
+                                //alert(data);
 
-                            return false;
-                            //window.location.href = "searchList?LF=" + data;
-                        });
-                    return false;
+                                if (data == 'MobileRepeat') {
+                                    $('#alert').text('Mobile Number is already registered!');
+                                    $('#txt_contact').val('');
+                                } else if (data == 'EmailRepeat') {
+                                    $('#alert').text('Email ID is already registered!');
+                                    $('#txt_contact').val('');
+                                } else if (data == 'FNameEmptyErr') {
+                                    $('#alert').text('Please enter first name');
+                                    $('#txt_fname').val('');
+                                } else if (data == 'FNameNumberErr') {
+                                    $('#alert').text('Please enter first name');
+                                    $('#txt_fname').val('');
+                                } else if (data == 'LNameEmptyErr') {
+                                    $('#alert').text('Please enter last name');
+                                    $('#txt_lname').val('');
+                                } else if (data == 'LNameNumberErr') {
+                                    $('#alert').text('Please enter last name');
+                                    $('#txt_lname').val('');
+                                } else if (data == '1') {
+                                    $('#alert').text('Form Submitted Successfully!');
+                                    $('#txt_fname').val('');
+                                    $('#txt_lname').val('');
+                                    $('#txt_contact').val('');
+                                    $('#txt_pass').val('');
+                                } else if (data == '0') {
+                                    $('#alert').text('Please check connection!');
+                                }
+                                return false;
+                                //window.location.href = "searchList?LF=" + data;
+                            });
+                        return false;
+                    } else if (userType == 'Recruiter') {
+                        $.post("app/recruiterRegiEntry?DD=" + newDate + "&MM=" + newMonth + "&YY=" + newYear,
+                            $("#myRegiForm").serialize(),
+                            function(data) {
+
+                                if (data == 'MobileRepeat') {
+                                    $('#alert').text('Mobile Number is already registered!');
+                                    $('#txt_contact').val('');
+                                } else if (data == 'EmailRepeat') {
+                                    $('#alert').text('Email ID is already registered!');
+                                    $('#txt_contact').val('');
+                                } else if (data == 'FNameEmptyErr') {
+                                    $('#alert').text('Please enter first name');
+                                    $('#txt_fname').val('');
+                                } else if (data == 'FNameNumberErr') {
+                                    $('#alert').text('Please enter first name');
+                                    $('#txt_fname').val('');
+                                } else if (data == 'LNameEmptyErr') {
+                                    $('#alert').text('Please enter last name');
+                                    $('#txt_lname').val('');
+                                } else if (data == 'LNameNumberErr') {
+                                    $('#alert').text('Please enter last name');
+                                    $('#txt_lname').val('');
+                                } else if (data == '1') {
+                                    $('#alert').text('Form Submitted Successfully!');
+                                    $('#txt_fname').val('');
+                                    $('#txt_lname').val('');
+                                    $('#txt_contact').val('');
+                                    $('#txt_pass').val('');
+                                } else if (data == '0') {
+                                    $('#alert').text('Please check connection!');
+                                }
+
+                                return false;
+                                //window.location.href = "searchList?LF=" + data;
+                            });
+                        return false;
+                    }
                 }
 
+
+                //Regi Function Ends
             });
+
+            //MAIN ENDS    
         });
 
     </script>
@@ -339,4 +366,5 @@
     <script src="js/mobileMenu.js"></script>
 
 </body>
+
 </html>
