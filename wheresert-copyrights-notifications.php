@@ -1,48 +1,31 @@
 <?php
     error_reporting(0);
-    //session_start();
     include_once("config/connection.php");
-    include_once('userInfo.php');
-    include_once('pageInfo.php');
 ?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>WHERESERT</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/bulma.css">
-    <link rel="stylesheet" href="css/website.css">
     <meta name="description" content="">
     <meta name="keywords" content="">
+    <?php include_once('scripts/headTags.php') ?>
 </head>
 
 <body>
 
-    <!--Top Menu Starts-->
-    <?php
-    include_once('topInner.php');
-    ?>
-    <!--Top Menu Ends-->
-
+    <!--Nav Starts-->
+    <?php include_once('topInner.php'); ?>
+    <!--Nav Ends-->
 
     <section class="section greenSection" style="margin-top:50px">
         <div class="container">
             <h2 class="subtitle">
-                WhereSert Copyrights Notifications
+                WhereSert Copy Notifications
             </h2>
         </div>
     </section>
-
-    <section class="section">
-        <div class="container">
-
-        </div>
-    </section>
-
 
     <!--Footer Starts-->
     <?php include_once('footer.php'); ?>
@@ -52,8 +35,35 @@
     <?php include_once('copyrights.php'); ?>
     <!--Copyrights End-->
 
+    <?php include_once('scripts/bottomScripts.php') ?>
 
 
+    <script>
+        $(document).ready(function() {
+
+            $('#btnFind').click(function() {
+                //var cityName = $("#select_search option:selected").text();
+                var lookingFor = $('#txt_search').val();
+                alert(lookingFor);
+                return false;
+                //window.location.href="searchList?LF="+lookingFor;
+            });
+
+            /*
+
+            //Category Function
+            $('.mainCategory').click(function(){
+                var mainCatName=$(this).attr('mainCatID');
+                window.location.href="maincategory?ID="+mainCatName;
+            });
+
+            */
+
+        });
+
+    </script>
+
+    <script src="js/mobileMenu.js"></script>
 
 </body>
 
