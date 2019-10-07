@@ -286,6 +286,8 @@
                                 if (data == 'MobileRepeat') {
                                     $('#alert').text('Mobile Number is already registered!');
                                     $('#txt_contact').val('');
+                                } else if (data == 'InvalidMobile') {
+                                    $('#alert').text('Mobile number is not valid!');
                                 } else if (data == 'EmailRepeat') {
                                     $('#alert').text('Email ID is already registered!');
                                     $('#txt_contact').val('');

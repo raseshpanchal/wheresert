@@ -7,81 +7,92 @@
 
     if($existingContact==1)
     {
-        //If Entered Mobile Number
+        //Check Mobile Number Validation
         $checkMobile=$_POST["txt_contact"];
-        $queryFindMobile = mysqli_query($link,"SELECT * FROM freelancer_registration WHERE Mobile='$checkMobile'");
-        $queryCountMobile = mysqli_num_rows($queryFindMobile);
         
-        if($queryCountMobile!=0)
+        if(!preg_match('/^[0-9]{10}+$/', $checkMobile))
         {
-            //Mobile Number is Already Used
-            echo 'MobileRepeat';
+            echo 'InvalidMobile';
         }
         else
         {
+            //If Entered Mobile Number
+            $checkMobile=$_POST["txt_contact"];
+            $queryFindMobile = mysqli_query($link,"SELECT * FROM freelancer_registration WHERE Mobile='$checkMobile'");
+            $queryCountMobile = mysqli_num_rows($queryFindMobile);
+
+            if($queryCountMobile!=0)
+            {
+            //Mobile Number is Already Used
+            echo 'MobileRepeat';
+            }
+            else
+            {
             //Mobile Number New Entry
             //Check First Name
             if(empty($_POST["txt_fname"]))
             {
-                echo 'FNameEmptyErr';
+            echo 'FNameEmptyErr';
             }
             else
             {
-                //Check First Name String
-                $name = test_input($_POST["txt_fname"]);
-                if(!preg_match("/^[a-zA-Z' ]*$/",$name))
-                {
-                    echo 'FNameNumberErr';
-                }
-                else
-                {
-                    //First Name OK - Check Last Name
-                    //Check Last Name
-                    if(empty($_POST["txt_lname"]))
-                    {
-                        echo 'LNameEmptyErr';
-                    }
-                    //Check Latst Name String
-                    $name = test_input($_POST["txt_lname"]);
-                    if(!preg_match("/^[a-zA-Z' ]*$/",$name))
-                    {
-                        echo 'LNameNumberErr';
-                    }
-                    else
-                    {
-                        //Check Empty Password
-                        if(empty($_POST["txt_pass"]))
-                        {
-                            echo 'PassEmptyErr';
-                        }
-                        else
-                        {
-                            //Insert Records with Mobile Number
-                            $newFName=ucfirst(strtolower($_POST["txt_fname"]));
-                            $newLName=ucfirst(strtolower($_POST["txt_lname"]));
-                            $newContact=$_POST["txt_contact"];
-                            $newPass=$_POST["txt_pass"];
-                            $newGender=$_POST["userGender"];
-                            $userDD=$_GET['DD'];
-                            $userMM=$_GET['MM'];
-                            $userYY=$_GET['YY'];
-                            $userBOD=$userDD.'/'.$userMM.'/'.$userYY;
-                            
-                            //Insert Into DB
-                            $query_1=mysqli_query($link, "INSERT INTO freelancer_registration SET FirstName='$newFName', LastName='$newLName', Mobile='$newContact', DOB='$userBOD', Gender='$newGender', Password='$newPass', CreateDate=now(), CreateTime=now(), PaidPhoto='No', PaidBanners='No', PaidListing='No', Status='Wizard'");
-                            if($query_1)
-                            {
-                                echo '1';
-                            }
-                            else
-                            {
-                                echo '0';
-                            }
-                        }
-                    }
-                }
+            //Check First Name String
+            $name = test_input($_POST["txt_fname"]);
+            if(!preg_match("/^[a-zA-Z' ]*$/",$name))
+            {
+            echo 'FNameNumberErr';
             }
-        }
+            else
+            {
+            //First Name OK - Check Last Name
+            //Check Last Name
+            if(empty($_POST["txt_lname"]))
+            {
+            echo 'LNameEmptyErr';
+            }
+            //Check Latst Name String
+            $name = test_input($_POST["txt_lname"]);
+            if(!preg_match("/^[a-zA-Z' ]*$/",$name))
+            {
+            echo 'LNameNumberErr';
+            }
+            else
+            {
+            //Check Empty Password
+            if(empty($_POST["txt_pass"]))
+            {
+            echo 'PassEmptyErr';
+            }
+            else
+            {
+            //Insert Records with Mobile Number
+            $newFName=ucfirst(strtolower($_POST["txt_fname"]));
+            $newLName=ucfirst(strtolower($_POST["txt_lname"]));
+            $newContact=$_POST["txt_contact"];
+            $newPass=$_POST["txt_pass"];
+            $newGender=$_POST["userGender"];
+            $userDD=$_GET['DD'];
+            $userMM=$_GET['MM'];
+            $userYY=$_GET['YY'];
+            $userBOD=$userDD.'/'.$userMM.'/'.$userYY;
+
+            //Insert Into DB
+            $query_1=mysqli_query($link, "INSERT INTO freelancer_registration SET FirstName='$newFName', LastName='$newLName', Mobile='$newContact', DOB='$userBOD', Gender='$newGender', Password='$newPass', CreateDate=now(), CreateTime=now(), PaidPhoto='No', PaidBanners='No', PaidListing='No', Status='Wizard'");
+            if($query_1)
+            {
+            echo '1';
+            }
+            else
+            {
+            echo '0';
+            }
+            }
+            }
+            }
+            }
+            }
+        //Mobile Validation Ends
+        }        
         
     }
     else
