@@ -90,7 +90,7 @@
             //Submit Expression
             $("#btnSubmit").click(function() {
                 var newEmail = $('#txt_email').val();
-
+                $('#alert').text('Please wait...');
 
                 $.post("app/loginProblemEntry",
                     $("#myFormLoginProblem").serialize(),
@@ -99,7 +99,7 @@
                         if (data == 'notEmail') {
                             $('#alert').text('Improper Email ID Entry!');
                         } else if (data == 'emailSuccess') {
-                            $('#alert').text('Request Submitted Successfully! Please check your email inbox.');
+                            $('#alert').text('Request Submitted Successfully! Please check email inbox.');
                             $('#txt_email').val('');
                         } else if (data == 'emailErr') {
                             $('#alert').text('Email is not registered with us.');
