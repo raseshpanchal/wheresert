@@ -75,7 +75,7 @@
                         </div>
                         <div class="column">
                             <h2 class="subtitle">
-                                Join Comminuty
+                                Join Community
                             </h2>
                             <a href="wheresert-sign-up" class="button is-primary is-outlined">
                                 Join Now
