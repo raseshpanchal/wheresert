@@ -18,7 +18,7 @@
                         <a href="wheresert-sign-up" class="button is-dark is-outlined">
                             Join Now
                         </a>
-                        <a href="wheresert-sign-in" class="button is-primary is-outlined" href="wheresert-sign-up">
+                        <a href="wheresert-sign-in" class="button is-primary is-outlined">
                             Sign In
                         </a>
                     </div>

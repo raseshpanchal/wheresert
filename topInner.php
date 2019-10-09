@@ -73,10 +73,10 @@
             </div>
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-dark is-outlined">
+                    <a href="wheresert-sign-up" class="button is-dark is-outlined">
                         Join Now
                     </a>
-                    <a class="button is-primary is-outlined" href="wheresert-sign-up">
+                    <a href="wheresert-sign-in" class="button is-primary is-outlined">
                         Sign In
                     </a>
                 </div>
