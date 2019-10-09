@@ -1,4 +1,4 @@
 UserAgent: *
 Disallow:
 
-http://www.emgindia.in/sitemap.xml
+http://www.wheresert.com/sitemap.xml
