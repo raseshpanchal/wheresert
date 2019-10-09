@@ -1,0 +1,4 @@
+UserAgent: *
+Disallow:
+
+http://www.emgindia.in/sitemap.xml
