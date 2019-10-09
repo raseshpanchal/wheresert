@@ -35,23 +35,15 @@
     <script>
         $(document).ready(function() {
 
-            $('#btnFind').click(function() {
-                //var cityName = $("#select_search option:selected").text();
-                var lookingFor = $('#txt_search').val();
-                alert(lookingFor);
+            $("#btnFind").click(function() {
+                $.post("app/findProfile",
+                    $("#myForm").serialize(),
+                    function(data) {
+                        //alert(data);
+                        window.location.href = "searchList?LF=" + data;
+                    });
                 return false;
-                //window.location.href="searchList?LF="+lookingFor;
             });
-
-            /*
-
-            //Category Function
-            $('.mainCategory').click(function(){
-                var mainCatName=$(this).attr('mainCatID');
-                window.location.href="maincategory?ID="+mainCatName;
-            });
-
-            */
 
         });
 
