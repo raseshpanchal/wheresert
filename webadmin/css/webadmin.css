@@ -1,0 +1,266 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+	padding-top: 50px;
+	overflow:hidden;
+}
+
+html, body a
+{
+	text-decoration:none;
+}
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+  background-color:#ffd777;
+  color:#0f1524;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+  
+  #formArea {
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 10px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  border-bottom:dotted 1px #1b1e26;
+  background-color:#424a5d;
+  color:#aeb2b7;
+  height:40px;
+}
+.nav-sidebar > li > a:hover,
+.nav-sidebar > li > a:focus {
+  color:#fff;
+  background-color: #365873;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color:#fff;
+  background-color: #428bca;
+}
+
+.navbar-nav li i
+{
+	color:#424a5d;
+}
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+
+.form-require{
+	border:solid 1px #C00;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.textGrey{
+	color:#424a5d;
+}
+
+.textGrey:hover{
+	text-decoration:underline;
+}
+
+.textBlack{
+	color:#333;
+	text-decoration:none;
+}
+
+.menuSepa
+{
+	color:#3FF;
+	border:solid 0px #FF0;
+	border-bottom:dotted 1px #68dff0;
+	width:100%;
+	margin-left:-20px;
+	height:50px;
+	padding-top:15px;
+	padding-left:10px;
+	margin-top:-10px;
+}
+
+.formShadow{
+	background-image:url(../images/form-shadow.png);
+	background-position:top right;
+	background-repeat:no-repeat;
+	position:absolute;
+	height:500px;
+	width:53px;
+	margin-left:-53px;
+	margin-top:1px;
+	border:solid 0px #F00;
+}
+
+.myBtn{
+	height:35px;
+	margin-top:-3px;
+	padding:0px;
+	width:75px;
+	border-left:solid 1px #FFF;
+}
+
+.myBtnBlue{
+	height:35px;
+	padding:8px;
+	border-left:solid 1px #FFF;
+	background-color:#595959;
+	color:#FFF;
+	padding-top:6px;
+}
+
+.myBtnBlue:hover{
+	background-color:#d9592d;
+	color:#FFF;
+}
+
+.titleTab{
+	position:absolute;
+	width:50%;
+	height:35px;
+	padding:10px;
+	color:#FFF;
+	border-left:solid 1px #FFF;
+}
+
+.titleSubject{
+	width:100%;
+	height:35px;
+	padding:10px;
+	color:#FFF;
+	background-color:#f0ad4e;
+	border-bottom:solid 1px #FFF;
+}
+
+.titleModule{
+	width:100%;
+	height:35px;
+	padding:10px;
+	color:#FFF;
+	background-color:#b3aca4;
+	border-bottom:solid 1px #FFF;
+}
+
+/*Main Menu Style Starts Here*/
+ul#menu, ul#menu ul {
+	list-style-type:none;
+	margin: 0;
+	padding: 0;
+	width:227px;
+}
+
+ul#menu a {
+	display: block;
+	text-decoration: none;
+	
+}
+
+ul#menu li {
+	margin-top: 1px;
+}
+
+ul#menu li a {
+	background: #4a5779;
+	color: #fff;	
+	padding:10px;
+	border-bottom:dotted 1px #999;
+}
+
+ul#menu li a:hover {
+	background: #424a5d;
+}
+
+ul#menu li ul li a {
+	background: #5f6269;
+	color: #fff;
+	padding-left: 10px;
+}
+
+ul#menu li ul li a:hover,ul#menu li ul .current a {
+	background: #4c4c4e;
+	border-left: 2px #000 solid;
+}
+/*Main Menu Style Ends Here*/
