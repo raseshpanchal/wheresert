@@ -54,12 +54,7 @@
                                     <article class="media">
                                         <div class="media-content">
                                             <div class="content">
-                                                <p>
-                                                    <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                                                    <br>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
-                                                </p>
-                                                <strong style="color: #fff; font-size:13pt;">Careers</strong><img src="images/arrowWhite.png" style="margin-bottom:-5px" />
+                                                <strong style="color: #fff; font-size:13pt;">Careers</strong><img src="images/arrowWhite.png" style="margin-bottom:-5px; padding-top: 150px; " />
                                             </div>
                                         </div>
                                     </article>
@@ -71,12 +66,7 @@
 
                                         <div class="media-content">
                                             <div class="content">
-                                                <p>
-                                                    <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                                                    <br>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
-                                                </p>
-                                                <strong style="color: #fff; font-size:13pt;">Blog</strong><img src="images/arrowWhite.png" style="margin-bottom:-5px" />
+                                                <strong style="color: #fff; font-size:13pt;">Blog</strong><img src="images/arrowWhite.png" style="margin-bottom:-5px; padding-top: 150px;" />
                                             </div>
                                         </div>
                                     </article>
