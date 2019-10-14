@@ -26,9 +26,9 @@ if($checkUser==1)
         $newPassword=$view_2['Password'];
         $newValid=$view_2['Status'];
         //Check Authenticated Account
-        if($newValid=='New')
+        if($newValid=='Blocked')
         {
-            echo 'validationError';
+            echo 'validationBlocked';
         }
         else
         {
@@ -45,6 +45,24 @@ if($checkUser==1)
                     //Valid User for Wizard
                     $_SESSION['whrsrtfruser']=$myUser;
                     echo 'validWizard';
+                }
+                else if($newValid=='Wizard02')
+                {
+                    //Valid User Process to incomplete wizard
+                    $_SESSION['whrsrtfruser']=$myUser;
+                    echo 'validWizard02';
+                }
+                else if($newValid=='Wizard03')
+                {
+                    //Valid User Process to incomplete wizard
+                    $_SESSION['whrsrtfruser']=$myUser;
+                    echo 'validWizard03';
+                }
+                else if($newValid=='Wizard04')
+                {
+                    //Valid User Process to incomplete wizard
+                    $_SESSION['whrsrtfruser']=$myUser;
+                    echo 'validWizard04';
                 }
                 else if($newValid=='Active')
                 {
@@ -73,9 +91,9 @@ else
         $newPassword=$view_2['Password'];
         $newValid=$view_2['Status'];
         //Check Authenticated Account
-        if($newValid=='New')
+        if($newValid=='Blocked')
         {
-            echo 'validationError';
+            echo 'validationBlocked';
         }
         else
         {
@@ -86,9 +104,37 @@ else
             }
             else
             {
-                //Valid User
-                $_SESSION['whrsrtfruser']=$myUser;
-                echo 'validUser';
+                //Check First Time Login for Wizard
+                if($newValid=='Wizard')
+                {
+                    //Valid User for Wizard
+                    $_SESSION['whrsrtfruser']=$myUser;
+                    echo 'validWizard';
+                }
+                else if($newValid=='Wizard02')
+                {
+                    //Valid User Process to incomplete wizard
+                    $_SESSION['whrsrtfruser']=$myUser;
+                    echo 'validWizard02';
+                }
+                else if($newValid=='Wizard03')
+                {
+                    //Valid User Process to incomplete wizard
+                    $_SESSION['whrsrtfruser']=$myUser;
+                    echo 'validWizard03';
+                }
+                else if($newValid=='Wizard04')
+                {
+                    //Valid User Process to incomplete wizard
+                    $_SESSION['whrsrtfruser']=$myUser;
+                    echo 'validWizard04';
+                }
+                else if($newValid=='Active')
+                {
+                    //Valid User
+                    $_SESSION['whrsrtfruser']=$myUser;
+                    echo 'validUser';
+                }
             }
         }
     }

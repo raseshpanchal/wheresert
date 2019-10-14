@@ -218,8 +218,8 @@
                                         $('#login_user').val('');
                                         $('#login_pass').val('');
                                         $('.btnLogin').attr("disabled", false);
-                                    } else if (data == 'validationError') {
-                                        $('#loginStatus').html('<span style="color:red">Please Validate Your Account Before Login</span>').fadeIn(300);
+                                    } else if (data == 'validationBlocked') {
+                                        $('#loginStatus').html('<span style="color:red">This account has been blocked!</span>').fadeIn(300);
                                         $('#login_user').val('');
                                         $('#login_pass').val('');
                                         $('.btnLogin').attr("disabled", false);
@@ -229,6 +229,21 @@
                                         $('#login_pass').val('');
                                         $('.btnLogin').attr("disabled", false);
                                     } else if (data == 'validWizard') {
+                                        $('#loginStatus').html('<span style="color:green">Account Athenticated. Please wait...</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        window.location.href = 'freelancer-registration-process';
+                                    } else if (data == 'validWizard02') {
+                                        $('#loginStatus').html('<span style="color:green">Account Athenticated. Please wait...</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        window.location.href = 'freelancer-registration-process';
+                                    } else if (data == 'validWizard03') {
+                                        $('#loginStatus').html('<span style="color:green">Account Athenticated. Please wait...</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        window.location.href = 'freelancer-registration-process';
+                                    } else if (data == 'validWizard04') {
                                         $('#loginStatus').html('<span style="color:green">Account Athenticated. Please wait...</span>').fadeIn(300);
                                         $('#login_user').val('');
                                         $('#login_pass').val('');

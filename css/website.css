@@ -126,6 +126,66 @@ h3 {
     margin-left: 20px;
 }
 
+.profilePageSeries {
+    position: absolute;
+    z-index: 1;
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 125px;
+    height: 125px;
+    border-radius: 125px;
+    background-color: #acd373;
+    text-align: center;
+    font-family: 'robotolight';
+    font-size: 50pt;
+    color: #FFF;
+    padding-top: 10px;
+}
+
+.profilePageSeriesMobile {
+    position: absolute;
+    z-index: 1;
+    margin-top: -50px;
+    margin-left: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    background-color: #acd373;
+    text-align: center;
+    font-size: 30pt;
+    color: #FFF;
+    padding-top: 15px;
+}
+
+.profilePagePic {
+    position: absolute;
+    z-index: 1;
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 125px;
+    height: 125px;
+    border-radius: 125px;
+    border: solid 3px #FFF;
+    background-image: url(../profilePics/1570709848_9820098200.jpg);
+    background-position: center center;
+    background-size: cover;
+}
+
+.profilePagePicMobile {
+    /*    position: absolute;*/
+    z-index: 1;
+    margin: auto;
+    margin-top: -50px;
+    /*    margin-left: 20px;*/
+
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    border: solid 3px #FFF;
+    background-position: center center;
+    background-size: cover;
+}
+
 .footerList li {
     font-size: 10pt;
     height: 25px;
@@ -144,24 +204,4 @@ h3 {
 
 .formSpace {
     margin-bottom: 15px;
-}
-
-.about {
-    margin-top: 105px;
-    font-family: 'robotolight';
-}
-
-.videoHolder {
-    width: 80%;
-    height: 190px;
-    border: solid 2px #a6ce39;
-    margin-bottom: 25px;
-}
-
-
-.box {
-    width: 210px;
-    height: 210px;
-    background-color: #167395;
-    color: white;
 }

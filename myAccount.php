@@ -1,6 +1,7 @@
 <?php
     error_reporting(0);
     include_once("config/connection.php");
+    include_once("userInfo.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,19 +21,31 @@
     <!--Nav Ends-->
 
     <!--Main Content Area Starts-->
-    <div style="margin-top:120px"></div>
-    <section class="hero is-dark">
+    <div style="margin-top:55px"></div>
+    <section class="hero" style="background-image:url(images/profileBg.jpg)">
         <div class="hero-body">
             <div class="container" style="text-align:center;">
-                <h1 class="loveTitle" style="color:#FFF !important;">
-                    Dear Member your registration is under approval process.<br />We will inform you shortly!
+                <h1 class="loveTitle" style="color:#333 !important;">
+                    <b><?=$userFullName?></b>
                 </h1>
             </div>
         </div>
     </section>
 
-    <img src="images/expressLove.png" class="expressLove is-hidden-mobile" />
-    <img src="images/expressLove.png" class="expressLoveMobile is-hidden-desktop" />
+    <div class="profilePagePic is-hidden-mobile" style="background-image: url(profilePics/<?=$userProfilePic?>);"></div>
+    <div class="profilePagePicMobile is-hidden-desktop" style="background-image: url(profilePics/<?=$userProfilePic?>);"></div>
+
+    <section class="section">
+        <div class="columns">
+            <div class="column is-hidden-mobile"></div>
+            <div class="column is-8" style="text-align:center">
+                <h3><?=$userDescription?></h3>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+        </div>
+    </section>
+
+
     <section class="hero is-light">
         <div class="hero-body">
             <div class="container" style="text-align:center">
