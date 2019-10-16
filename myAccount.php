@@ -70,6 +70,13 @@
             cursor: pointer;
         }
 
+        .listTick {
+            background-image: url(images/tickMark.png);
+            background-repeat: no-repeat;
+            background-position: center left;
+            padding-left: 25px !important;
+        }
+
     </style>
 </head>
 
@@ -140,12 +147,22 @@
                             <img src="images/setting.png" class="settingIcon" id="mySkills" />
                         </h3>
                         <ul class="myList">
-                            <li>001</li>
-                            <li>002</li>
-                            <li>003</li>
-                            <li>003</li>
-                            <li>004</li>
-                            <li>005</li>
+                            <?php
+                                //Fetch User's Skills
+                                $query_userSkill=mysqli_query($link, "SELECT * FROM freelancer_skills WHERE FreelancerID='$userID'");
+                                while($view_userSkill=mysqli_fetch_array($query_userSkill))
+                                {
+                                    $mySkillID=$view_userSkill['SkillID'];
+                                    //Fetch Skills Name
+                                    $query_skillsName=mysqli_query($link, "SELECT * FROM subcategories WHERE ID='$mySkillID'");
+                                    $view_skillsName=mysqli_fetch_array($query_skillsName);
+                                    $newSubCategory=$view_skillsName['SubCategory'];
+                                    ?>
+                            <li class="listTick">
+                                <?=$newSubCategory?></li>
+                            <?php
+                                }
+                            ?>
                         </ul>
                     </div>
                     <!--Skills End-->
@@ -157,12 +174,23 @@
                             <img src="images/setting.png" class="settingIcon" id="myLanguages" />
                         </h3>
                         <ul class="myList">
-                            <li>001</li>
-                            <li>002</li>
-                            <li>003</li>
-                            <li>003</li>
-                            <li>004</li>
-                            <li>005</li>
+                            <?php
+                                //Fetch User's Languages
+                                $query_languages=mysqli_query($link, "SELECT * FROM freelancer_languages WHERE FreelancerID='$userID'");
+                                while($view_languages=mysqli_fetch_array($query_languages))
+                                {
+                                    $myLanguageID=$view_languages['LanguageID'];
+                                    //Fetch Language Name
+                                    $query_langName=mysqli_query($link, "SELECT * FROM language_master WHERE ID='$myLanguageID'");
+                                    $view_langName=mysqli_fetch_array($query_langName);
+                                    $newLanguage=$view_langName['Language'];
+                                    ?>
+                            <li class="listTick">
+                                <?=$newLanguage?>
+                            </li>
+                            <?php
+                                }
+                            ?>
                         </ul>
                     </div>
                     <!--Languages End-->

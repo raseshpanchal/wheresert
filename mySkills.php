@@ -7,6 +7,22 @@
     {
         header("Location: ./");
     }
+
+    //Fetch Main Category
+    $cat_user=mysqli_query($link, "SELECT * FROM freelancer_categories WHERE UserID='$userID'");
+    $view_cat=mysqli_fetch_array($cat_user);
+    $newMainCatID=$view_cat['MainCatID'];
+    $newSubCatID=$view_cat['SubCatID'];
+
+    //Main Category Name
+    $maincat_user=mysqli_query($link, "SELECT * FROM main_categories WHERE ID='$newMainCatID'");
+    $view_maincat=mysqli_fetch_array($maincat_user);
+    $newMainCatName=strtoupper($view_maincat['MainCat']);
+
+    //Sub Category Name
+    $subcat_user=mysqli_query($link, "SELECT * FROM categories WHERE ID='$newSubCatID'");
+    $view_subcat=mysqli_fetch_array($subcat_user);
+    $newSubCatName=strtoupper($view_subcat['Category']);
 ?>
 
 <!DOCTYPE html>
@@ -65,10 +81,12 @@
             font-size: 11pt !important;
         }
 
+        /*
         .myList li span {
             float: right;
             font-size: 10pt !important;
         }
+        */
 
     </style>
 </head>
@@ -102,7 +120,7 @@
 
                     <!--Page Title Starts-->
                     <div class="boxTitle">
-                        <h3 class="pageTitle">MY SKILLS
+                        <h3 class="pageTitle"><?=$newMainCatName?>&nbsp;&nbsp;>&nbsp;&nbsp;<?=$newSubCatName?>
                             <img src="images/home.png" class="settingIcon" id="myHome" />
                         </h3>
                     </div>
@@ -110,14 +128,57 @@
 
                     <!--Services List Starts-->
                     <div class="box">
-
-                        <ul class="myList">
-                            <li>001 <span>22/08/2019</span></li>
-                            <li>001</li>
-                            <li>001</li>
-                            <li>001</li>
-                            <li>001</li>
-                        </ul>
+                        <form name="mySkillForm" id="mySkillForm" method="POST">
+                            <ul class="myList">
+                                <?php
+                        $query_mainCatList=mysqli_query($link, "SELECT * FROM categories WHERE ID='$newSubCatID' ORDER BY Category ASC");
+                        while($view_mainCatList=mysqli_fetch_array($query_mainCatList))
+                        {
+                            $newCatID=$view_mainCatList['ID'];
+                            $newCategory=$view_mainCatList['Category'];
+                            //Find Skills List
+                            $query_skillsList=mysqli_query($link, "SELECT * FROM subcategories WHERE Publish='Yes' AND CatID='$newCatID' ORDER BY SubCategory ASC");
+                            while($view_skillsList=mysqli_fetch_array($query_skillsList))
+                            {
+                                $newSubCatID=$view_skillsList['ID'];
+                                $newSubCategory=$view_skillsList['SubCategory'];
+                                //Fetch User's Skills
+                                $query_userSkill=mysqli_query($link, "SELECT * FROM freelancer_skills WHERE FreelancerID='$userID' AND SkillID='$newSubCatID'");
+                                $view_userSkill=mysqli_fetch_array($query_userSkill);
+                                $mySkillID=$view_userSkill['SkillID'];
+                                ?>
+                                <li>
+                                    <input type="checkbox" id="checkboxvar[]" <?php
+                                if($newSubCatID==$mySkillID)
+                                {
+                                    echo 'checked="checked"';
+                                }
+                                ?> name="checkboxvar[]" value="<?=$newSubCatID?>" />
+                                    &nbsp;&nbsp;
+                                    <?php
+                                if($newSubCatID==$mySkillID)
+                                {
+                                    ?>
+                                    <span style="color:red"><?=$newSubCategory?></span>
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                    <?=$newSubCategory?>
+                                    <?php
+                                }
+                                ?>
+                                </li>
+                                <?php
+                            }
+                        }
+                        ?>
+                                <li style="border:0; text-align:right">
+                                    <button class="button is-danger is-small btnSave">UPDATE</button>
+                                </li>
+                            </ul>
+                        </form>
 
                     </div>
                     <!--Services List Ends-->
@@ -156,6 +217,27 @@
             $("#myHome").click(function() {
                 window.location.href = "myAccount";
             });
+
+            //Update Skills
+            $('.btnSave').click(function() {
+
+                $('#btnSave').attr("disabled", true);
+
+                $.post("app/skillsEditFormEntry",
+                    $("#mySkillForm").serialize(),
+                    function(data) {
+                        if (data == 'skills_1') {
+                            location.reload();
+                        }
+                        if (data == 'skills_0') {
+                            alert('Check Connection!');
+                            //$('#skills').load('skillsShow');
+                        }
+                    });
+
+                return false;
+            });
+
         });
 
     </script>

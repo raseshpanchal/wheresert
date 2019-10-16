@@ -65,11 +65,6 @@
             font-size: 11pt !important;
         }
 
-        .myList li span {
-            float: right;
-            font-size: 10pt !important;
-        }
-
     </style>
 </head>
 
@@ -110,14 +105,51 @@
 
                     <!--Services List Starts-->
                     <div class="box">
+                        <form name="myLanguageForm" id="myLanguageForm" method="POST">
+                            <ul class="myList">
+                                <?php
+                                $query_lang=mysqli_query($link, "SELECT * FROM language_master WHERE Publish='Yes' ORDER BY Language ASC");
+                                while($view_lang=mysqli_fetch_array($query_lang))
+                                {
+                                    $newLangID=$view_lang['ID'];
+                                    $newLanguage=$view_lang['Language'];
+                                    //Fetch User's Languages
+                                    $query_userLang=mysqli_query($link, "SELECT * FROM freelancer_languages WHERE FreelancerID='$userID' AND LanguageID='$newLangID'");
+                                    $view_userLang=mysqli_fetch_array($query_userLang);
+                                    $myLanguageID=$view_userLang['LanguageID'];
+                                    ?>
+                                <li>
+                                    <input type="checkbox" id="checkboxvar[]" <?php
+                                    if($newLangID==$myLanguageID)
+                                    {
+                                        echo 'checked="checked"';
+                                    }
+                                    ?> name="checkboxvar[]" value="<?=$newLangID?>" />
+                                    &nbsp;&nbsp;
+                                    <?php
+                                    if($newLangID==$myLanguageID)
+                                    {
+                                        ?>
+                                    <span style="color:red"><?=$newLanguage?></span>
+                                    <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                    <?=$newLanguage?>
+                                    <?php
+                                    }
+                                    ?>
+                                </li>
+                                <?php
+                                }
+                                ?>
 
-                        <ul class="myList">
-                            <li>001 <span>22/08/2019</span></li>
-                            <li>001</li>
-                            <li>001</li>
-                            <li>001</li>
-                            <li>001</li>
-                        </ul>
+                                <li style="border:0; text-align:right">
+                                    <button class="button is-danger is-small btnSave">UPDATE</button>
+                                </li>
+                            </ul>
+                        </form>
 
                     </div>
                     <!--Services List Ends-->
@@ -156,6 +188,27 @@
             $("#myHome").click(function() {
                 window.location.href = "myAccount";
             });
+
+            //Update Language
+            //Check Class
+            $('.btnSave').click(function() {
+
+                $('#btnSave').attr("disabled", true);
+
+                $.post("app/languageEditFormEntry",
+                    $("#myLanguageForm").serialize(),
+                    function(data) {
+                        if (data == 'language_1') {
+                            location.reload();
+                        }
+                        if (data == 'language_0') {
+                            alert('Check Connection!');
+                        }
+                    });
+
+                return false;
+            });
+
         });
 
     </script>
