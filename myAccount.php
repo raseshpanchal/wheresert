@@ -245,29 +245,43 @@
                     <!--Services List Starts-->
                     <div class="box">
 
-                        <img src="images/setting.png" class="settingIcon" id="myServices" />
+                        <img src="images/add-green.png" class="settingIcon" id="myServices" />
 
+                        <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
+                            <strong>LIST OF SERVICES</strong>
+                        </h3>
+
+                        <?php
+                        //Fetch User's Services
+                        $query_service=mysqli_query($link, "SELECT * FROM  freelancer_services WHERE FreelancerID='$userID'");
+                        while($view_service=mysqli_fetch_array($query_service))
+                        {
+                            $myServiceTitle=$view_service['Title'];
+                            $myServiceCurrency=$view_service['Currency'];
+                            $myServicePrice=$view_service['Price'];
+                            $myServiceDesc=urldecode($view_service['Description']);
+                            ?>
                         <h3 style="text-align:left; font-size:13pt !important">
-                            Service Title 001
+                            <?=$myServiceTitle?>
                         </h3>
                         <span style="float:right; font-size:11pt; color:#000">
-                            Charges : AED 100
+                            Charges : <?=$myServiceCurrency?> <?=$myServicePrice?>
                         </span>
                         <br /><br />
-                        <?=$userDescription?>
-
-                        <hr />
-
-                        <h3 style="text-align:left; font-size:13pt !important">
-                            Service Title 001
-                        </h3>
+                        <?=$myServiceDesc?>
+                        <br /><br />
                         <span style="float:right; font-size:11pt; color:#000">
-                            Charges : AED 100
+                            <a href="#">
+                                <img src="images/delete.png" class="settingIcon" id="myServices" />
+                            </a>
+                            <a href="#">
+                                <img src="images/edit.gif" style="margin-left:5px; margin-right:5px" class="settingIcon" id="myServices" />
+                            </a>
                         </span>
-                        <br /><br />
-                        <?=$userDescription?>
-
                         <hr />
+                        <?php
+                        }
+                        ?>
 
                     </div>
                     <!--Services List Ends-->
