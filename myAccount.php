@@ -202,10 +202,28 @@
                             <img src="images/setting.png" class="settingIcon" id="mySocialMedia" />
                         </h3>
                         <ul class="myList">
-                            <li>Facebok</li>
-                            <li>Twitter</li>
-                            <li>Instagram</li>
-                            <li>Linked-in</li>
+                            <?php
+                                //Fetch User's Social Media
+                                $query_social=mysqli_query($link, "SELECT * FROM freelancer_social_media WHERE FreelancerID='$userID'");
+                                while($view_social=mysqli_fetch_array($query_social))
+                                {
+                                    $mySocialMediaID=$view_social['SocialMediaID'];
+                                    $mySocialMediaURL=$view_social['URL'];
+                                    //Fetch Media Details
+                                    $query_mediaName=mysqli_query($link, "SELECT * FROM socialmedia_master WHERE ID='$mySocialMediaID'");
+                                    $view_mediaName=mysqli_fetch_array($query_mediaName);
+                                    $newMediaName=$view_mediaName['MediaName'];
+                                    $newMediaLogo=$view_mediaName['Logo'];
+                                    ?>
+                            <li>
+                                <img src="images/<?=$newMediaLogo?>" align="middle" style="margin-top:-10px" /> &nbsp;
+                                <a href="<?=$mySocialMediaURL?>" target="_blank" style="color:#000">
+                                    <?=$newMediaName?>
+                                </a>
+                            </li>
+                            <?php
+                                }
+                            ?>
                         </ul>
                     </div>
                     <!--Social Media Links End-->

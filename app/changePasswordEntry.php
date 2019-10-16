@@ -15,7 +15,7 @@ else if($newPassword==$newConfirmPass)
 {
     //Update Values in DB
     $query_1=mysqli_query($link, "UPDATE freelancer_registration SET Password='$newPassword' WHERE EmailID='$myID'");
-    
+
     if($query_1)
     {
         echo '1';

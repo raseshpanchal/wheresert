@@ -7,6 +7,18 @@
     {
         header("Location: ./");
     }
+
+    //Fetch Media Name
+    $newMediaID=$_GET['SID'];
+    $query_social=mysqli_query($link, "SELECT * FROM socialmedia_master WHERE ID='$newMediaID'");
+    $view_social=mysqli_fetch_array($query_social);
+    $newMediaName=$view_social['MediaName'];
+    $newMediaLogo=$view_social['Logo'];
+
+    //Fetch User's Social Links
+    $query_userMedia=mysqli_query($link, "SELECT * FROM freelancer_social_media WHERE FreelancerID='$userID' AND SocialMediaID='$newMediaID'");
+    $view_userMedia=mysqli_fetch_array($query_userMedia);
+    $myURL=$view_userMedia['URL'];
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +114,7 @@
 
                     <!--Page Title Starts-->
                     <div class="boxTitle">
-                        <h3 class="pageTitle">MY SOCIAL MEDIA ACCOUNTS
+                        <h3 class="pageTitle"><?=strtoupper($newMediaName)?>
                             <img src="images/home.png" class="settingIcon" id="myHome" />
                         </h3>
                     </div>
@@ -111,44 +123,18 @@
                     <!--Services List Starts-->
                     <div class="box">
 
-                        <ul class="myList">
-                            <?php
-                            $query_social=mysqli_query($link, "SELECT * FROM socialmedia_master WHERE Publish='Yes' ORDER BY MediaName ASC");
-                            while($view_social=mysqli_fetch_array($query_social))
-                            {
-                                $newMediaID=$view_social['ID'];
-                                $newMediaName=$view_social['MediaName'];
-                                $newMediaLogo=$view_social['Logo'];
-                                ?>
-                            <li>
-                                <img src="images/<?=$newMediaLogo?>" align="middle" style="margin-top:-10px" /> &nbsp;
-                                <?=$newMediaName?>
-                                <span>
-                                    <?php
-                                    //Check User's Entry
-                                    $query_link=mysqli_query($link, "SELECT * FROM freelancer_social_media WHERE FreelancerID='$userID' AND SocialMediaID='$newMediaID'");
-                                    $view_link=mysqli_fetch_array($query_link);
-                                    $newMediaURL=$view_link['URL'];
-                                    if($newMediaURL)
-                                    {
-                                        ?>
-                                    <img src="images/tickMark.png" align="middle" style="margin-top:-10px" />
-                                    <a href="mySocialMediaLink?SID=<?=$newMediaID?>" style="color:#000">EDIT</a>
-                                    <?php
-                                    }
-                                    else
-                                    {
-                                        ?>
-                                    <a href="mySocialMediaLink?SID=<?=$newMediaID?>" style="color:#000">EDIT</a>
-                                    <?php
-                                    }
-                                    ?>
-                                </span>
-                            </li>
-                            <?php
-                            }
-                            ?>
-                        </ul>
+                        <form name="mySocialForm" id="mySocialForm" method="POST">
+                            <div class="columns">
+                                <div class="column">
+                                    <p>
+                                        <input class="input customInput formSpace" name="txt_url" id="txt_url" type="text" placeholder="Enter URL*" value="<?=$myURL?>">
+                                    </p>
+                                    <p style="text-align:right">
+                                        <button class="button is-danger is-small btnSave">UPDATE</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
 
                     </div>
                     <!--Services List Ends-->
@@ -187,6 +173,30 @@
             $("#myHome").click(function() {
                 window.location.href = "myAccount";
             });
+
+
+            //Check Class
+            $('.btnSave').click(function() {
+
+                $('#btnSave').attr("disabled", true);
+
+                $.post("app/socialMediaEditFormEntry?ID=<?=$newMediaID?>",
+                    $("#mySocialForm").serialize(),
+                    function(data) {
+                        if (data == 'social_1') {
+                            window.location.href = "mySocialMedia";
+                        }
+                        if (data == 'social_0') {
+                            alert('Check Connection!');
+                        }
+                    });
+
+                return false;
+            });
+
+
+
+
         });
 
     </script>
