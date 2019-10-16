@@ -286,10 +286,62 @@
                     </div>
                     <!--Services List Ends-->
 
+                    <!--Photo Gallery Starts-->
+                    <div class="box">
+                        <img src="images/add-green.png" class="settingIcon" id="myPhotos" />
+
+                        <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
+                            <strong>PHOTO GALLERY</strong>
+                        </h3>
+                    </div>
+                    <!--Photo Gallery Ends-->
+
+                    <!--Video Gallery Starts-->
+                    <div class="box">
+                        <img src="images/add-green.png" class="settingIcon" id="myVideos" />
+
+                        <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
+                            <strong>VIDEOS</strong>
+                        </h3>
+                    </div>
+                    <!--Video Gallery Ends-->
+
+                    <!--Audio Starts-->
+                    <div class="box">
+                        <img src="images/add-green.png" class="settingIcon" id="myAudio" />
+
+                        <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
+                            <strong>AUDIO</strong>
+                        </h3>
+                    </div>
+                    <!--Audio Ends-->
+
+                    <!--PDF Starts-->
+                    <div class="box">
+                        <img src="images/add-green.png" class="settingIcon" id="myPDF" />
+
+                        <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
+                            <strong>PDF DOCUMENTS</strong>
+                        </h3>
+                    </div>
+                    <!--PDF Ends-->
+
+                    <!--WebLink Starts-->
+                    <div class="box">
+                        <img src="images/add-green.png" class="settingIcon" id="myWebLink" />
+
+                        <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
+                            <strong>EXTERNAL WEB LINKS</strong>
+                        </h3>
+                    </div>
+                    <!--WebLink Ends-->
+
                     <!--User Reviews Start-->
+                    <!--
                     <div class="box">
                         Reviews
                     </div>
+                    -->
                     <!--User Reviews End-->
 
                 </div>
@@ -356,6 +408,38 @@
             $("#myServices").click(function() {
                 window.location.href = "myServices";
             });
+
+            //My Photos
+            $("#myPhotos").click(function() {
+                window.location.href = "myPhotos";
+            });
+
+            //My Video
+            $("#myVideos").click(function() {
+                window.location.href = "myVideos";
+            });
+
+            //My Audio
+            $("#myAudio").click(function() {
+                window.location.href = "myAudio";
+            });
+
+            //My Audio
+            $("#myAudio").click(function() {
+                window.location.href = "myAudio";
+            });
+
+            //My PDF
+            $("#myPDF").click(function() {
+                window.location.href = "myPDF";
+            });
+
+            //My Web Link
+            $("#myWebLink").click(function() {
+                window.location.href = "myWebLink";
+            });
+
+
         });
 
     </script>
