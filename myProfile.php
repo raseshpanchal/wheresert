@@ -111,13 +111,47 @@
                     <!--Services List Starts-->
                     <div class="box">
 
-                        <ul class="myList">
-                            <li>001 <span>22/08/2019</span></li>
-                            <li>001</li>
-                            <li>001</li>
-                            <li>001</li>
-                            <li>001</li>
-                        </ul>
+                        <form name="myProfileForm" id="myProfileForm" method="POST">
+
+                            <div class="columns">
+                                <div class="column">
+                                    <input type="text" class="input customInput" value="<?=$userDesignation?>" name="txt_designation" id="txt_designation" placeholder="Designation* (eg. Designer)">
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    <input type="text" class="input customInput" value="<?=$userMobile?>" name="txt_mobile" id="txt_mobile" placeholder="Contact Number*">
+                                </div>
+                                <div class="column">
+                                    <input type="text" class="input customInput" value="<?=$userEmailID?>" name="txt_email" id="txt_email" placeholder="Email ID*">
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    <input type="text" class="input customInput" value="<?=$userCity?>" name="txt_city" id="txt_city" placeholder="City Name*">
+                                </div>
+                                <div class="column">
+                                    <input type="text" class="input customInput" value="<?=$userState?>" name="txt_state" id="txt_state" placeholder="State Name*">
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <textarea class="textarea customInput has-fixed-size" name="txt_info" id="txt_info" rows="6" cols="50" placeholder="Your short profile*"><?=$userDescription?></textarea>
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    <button class="button is-danger is-pulled-right" name="btnSubmit" id="btnSubmit">Update</button>
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column" style="text-align:left; color:red;">
+                                    <span id="alert"></span>
+                                </div>
+                            </div>
+                        </form>
 
                     </div>
                     <!--Services List Ends-->
@@ -156,6 +190,49 @@
             $("#myHome").click(function() {
                 window.location.href = "myAccount";
             });
+
+            //Submit Form
+            $('#btnSubmit').click(function() {
+
+                $('#alert').html('<span style="color:#333">Please wait...</span>');
+
+                $('#btnSubmit').attr("disabled", true);
+
+                var newTitle = $('#txt_designation').val();
+                var newMobile = $('#txt_mobile').val();
+                var newEmail = $('#txt_email').val();
+                var newCity = $('#txt_city').val();
+                var newState = $('#txt_state').val();
+                var newInfo = $('#txt_info').val();
+
+                if (newTitle == '' || newMobile == '' || newEmail == '' || newCity == '' || newState == '' || newInfo == '') {
+                    $('#alert').html('<span style="color:red">All fields are mandatory!</span>');
+                } else {
+                    $('#alert').html('<span style="color:#333">Please wait...</span> Processing...');
+
+                    $.post("app/profileEditEntry",
+                        $("#myProfileForm").serialize(),
+                        function(data) {
+
+                            if (data == 'fieldsErr') {
+                                $('#alert').html('<span style="color:red">All fields are mandatory!</span>');
+                                $('.btnLogin').attr("disabled", false);
+                            } else if (data == '0') {
+                                $('#alert').html('<span style="color:red">Please check connection!</span>');
+                                $('.btnLogin').attr("disabled", false);
+                            } else if (data == '1') {
+                                $('#alert').html('<span style="color:blue">Updated successfully!</span>');
+                            }
+                        });
+
+
+
+                }
+
+                return false;
+            });
+
+
         });
 
     </script>
