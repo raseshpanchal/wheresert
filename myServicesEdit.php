@@ -7,6 +7,19 @@
     {
         header("Location: ./");
     }
+
+    
+    //Fetch User's Services
+    $servID=$_GET['SID'];
+
+    $query_service=mysqli_query($link, "SELECT * FROM  freelancer_services WHERE ID='$servID'");
+    $view_service=mysqli_fetch_array($query_service);
+    $myServiceTitle=$view_service['Title'];
+    $myServiceCurrency=$view_service['Currency'];
+    $myServicePrice=$view_service['Price'];
+    $myServiceDesc=urldecode($view_service['Description']);
+
+        
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +115,7 @@
 
                     <!--Page Title Starts-->
                     <div class="boxTitle">
-                        <h3 class="pageTitle">MY SERVICES
+                        <h3 class="pageTitle">EDIT SERVICES ENTRY
                             <img src="images/home.png" class="settingIcon" id="myHome" />
                         </h3>
                     </div>
@@ -115,27 +128,26 @@
 
                             <div class="columns">
                                 <div class="column">
-                                    <input type="hidden" class="input customInput" id="txt_ID" name="txt_ID">
-                                    <input type="text" class="input customInput" id="txt_title" name="txt_title" placeholder="Enter Title*">
+                                    <input type="text" class="input customInput" value="<?=$myServiceTitle?>" id="txt_title" name="txt_title" placeholder="Enter Title*">
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    <input type="text" class="input customInput" id="txt_currency" name="txt_currency" placeholder="Enter Currency*">
+                                    <input type="text" class="input customInput" value="<?=$myServiceCurrency?>" id="txt_currency" name="txt_currency" placeholder="Enter Currency*">
                                 </div>
                                 <div class="column">
-                                    <input type="text" class="input customInput" id="txt_price" name="txt_price" placeholder="Enter Price*">
+                                    <input type="text" class="input customInput" value="<?=$myServicePrice?>" id="txt_price" name="txt_price" placeholder="Enter Price*">
                                 </div>
                             </div>
 
                             <div class="columns">
                                 <div class="column">
-                                    <textarea class="textarea customInput has-fixed-size" name="txt_desc" id="txt_desc" rows="6" cols="50" placeholder="Your short profile*"></textarea>
+                                    <textarea class="textarea customInput has-fixed-size" name="txt_desc" id="txt_desc" rows="6" cols="50" placeholder="Your short profile*"><?=$myServiceDesc?></textarea>
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    <button class="button is-danger is-pulled-right" name="btnSubmit" id="btnSubmit">Save</button>
+                                    <button class="button is-danger is-pulled-right" name="btnSubmit" id="btnSubmit">Update</button>
                                 </div>
                             </div>
 
@@ -185,6 +197,7 @@
 
             //Add Form
             $('#btnSubmit').click(function() {
+                //                var myServID = $(this).attr('servID');
                 var newTitle = $('#txt_title').val();
                 var newCurrency = $('#txt_currency').val();
                 var newPrice = $('#txt_price').val();
@@ -195,7 +208,7 @@
                 } else {
                     $('#alert').html('<span style="color:#333">Please wait...</span> Processing...');
 
-                    $.post("app/servAddFormEntry",
+                    $.post("app/servEditFormEntry?ID=<?=$servID?>",
                         $("#myServicesForm").serialize(),
                         function(data) {
 
@@ -206,11 +219,7 @@
                                 $('#alert').html('<span style="color:red">Please check connection!</span>');
                                 $('.btnLogin').attr("disabled", false);
                             } else if (data == '1') {
-                                $('#alert').html('<span style="color:blue">Saved successfully!</span>');
-                                $('#txt_title').val('');
-                                $('#txt_currency').val('');
-                                $('#txt_price').val('');
-                                $('#txt_desc').val('');
+                                window.location.href = "myAccount";
                             }
                         });
 

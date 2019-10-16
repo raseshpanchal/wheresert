@@ -257,6 +257,7 @@
                         $query_service=mysqli_query($link, "SELECT * FROM  freelancer_services WHERE FreelancerID='$userID'");
                         while($view_service=mysqli_fetch_array($query_service))
                         {
+                            $myServiceID=$view_service['ID'];
                             $myServiceTitle=$view_service['Title'];
                             $myServiceCurrency=$view_service['Currency'];
                             $myServicePrice=$view_service['Price'];
@@ -273,10 +274,10 @@
                         <br /><br />
                         <span style="float:right; font-size:11pt; color:#000">
                             <a href="#">
-                                <img src="images/delete.png" class="settingIcon" id="myServices" />
+                                <img src="images/delete.png" class="settingIcon myServicesDelete" id="<?=$myServiceID?>" />
                             </a>
                             <a href="#">
-                                <img src="images/edit.gif" style="margin-left:5px; margin-right:5px" class="settingIcon" id="myServices" />
+                                <img src="images/edit.gif" style="margin-left:5px; margin-right:5px" class="settingIcon myServicesEdit" id="<?=$myServiceID?>" />
                             </a>
                         </span>
                         <hr />
@@ -438,6 +439,19 @@
             //My Services
             $("#myServices").click(function() {
                 window.location.href = "myServices";
+            });
+
+            //My Services Edit
+            $(".myServicesEdit").click(function() {
+
+                var myServID = $(this).attr('id');
+                window.location.href = "myServicesEdit?SID=" + myServID;
+            });
+
+            //My Services Delete
+            $(".myServicesDelete").click(function() {
+                var myServID = $(this).attr('id');
+                window.location.href = "myServicesDelete?SID=" + myServID;
             });
 
             //My Photos
