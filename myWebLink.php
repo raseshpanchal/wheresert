@@ -110,14 +110,45 @@
 
                     <!--Services List Starts-->
                     <div class="box">
+                        <form name="myLinkForm" id="myLinkForm" method="POST">
+                            <div class="columns">
+                                <div class="column">
 
-                        <ul class="myList">
-                            <li>001 <span>22/08/2019</span></li>
-                            <li>001</li>
-                            <li>001</li>
-                            <li>001</li>
-                            <li>001</li>
-                        </ul>
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-primary" type="text" name="txt_linkTitle" id="txt_linkTitle" placeholder="Enter Title*">
+                                        </div>
+                                    </div>
+
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-primary" type="text" name="txt_linkURL" id="txt_linkURL" placeholder="External Link*">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="columns">
+
+                                <div class="column">
+                                    <a class="button is-danger is-pulled-right btnSave" style="margin-left:10px">Save</a>
+                                    <a class="button is-dark is-pulled-right btnCancel">Cancel</a>
+
+                                </div>
+
+                            </div>
+
+                            <div class="columns">
+
+                                <div class="column">
+                                    <span id="alert"></span>
+                                </div>
+
+                            </div>
+
+                        </form>
 
                     </div>
                     <!--Services List Ends-->
@@ -156,6 +187,35 @@
             $("#myHome").click(function() {
                 window.location.href = "myAccount";
             });
+
+            //Save Form
+            $('.btnSave').click(function() {
+                var myTitle = $('#txt_linkTitle').val();
+                var myURL = $('#txt_linkURL').val();
+
+                if (myTitle != '' && myURL != '') {
+                    $.post("app/linkAddFormEntry",
+                        $("#myLinkForm").serialize(),
+                        function(data) {
+                            if (data == 'link_1') {
+                                $('#alert').text('Record has been added!');
+                                $('#txt_linkTitle').val('');
+                                $('#txt_linkURL').val('');
+                            }
+                            if (data == 'link_0') {
+                                $('#alert').text('Check Connection!');
+                            }
+                        });
+                }
+                return false;
+            });
+
+            //Cancel Button
+            $('.btnCancel').click(function() {
+                window.location.href = "myAccount";
+            });
+
+
         });
 
     </script>

@@ -49,6 +49,7 @@
             border-bottom: dotted 1px #333;
             padding: 5px;
             font-size: 11pt !important;
+            height: 35px;
         }
 
         h3 {
@@ -61,7 +62,7 @@
         .settingIcon {
             float: right;
             border: solid 1px #C6C2C1;
-            padding: 5px;
+            padding: 3px;
             border-radius: 3px;
             background-color: #F5F0EF;
         }
@@ -333,6 +334,36 @@
                         <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
                             <strong>EXTERNAL WEB LINKS</strong>
                         </h3>
+
+                        <ul class="myList">
+                            <?php
+                                //Fetch User's WebLink
+                                $query_weblink=mysqli_query($link, "SELECT * FROM freelancer_upload_weblink WHERE FreelancerID='$userID'");
+                                while($view_weblink=mysqli_fetch_array($query_weblink))
+                                {
+                                    $myWebLinkID=$view_weblink['ID'];
+                                    $myWebLinkTitle=$view_weblink['Title'];
+                                    $myWebLinkURL=$view_weblink['URL'];
+                                    ?>
+                            <li class="listTick">
+                                <a href="<?=$myWebLinkURL?>" target="_blank" style="color:#000">
+                                    <?=$myWebLinkTitle?>
+                                </a>
+
+                                <span style="float:right">
+                                    <a href="#">
+                                        <img src="images/delete.png" class="settingIcon" id="delWebLink" recordID="<?=$myWebLinkID?>" />
+                                    </a>
+                                    <a href="#">
+                                        <img src="images/edit.gif" style="margin-left:5px; margin-right:5px" class="settingIcon" id="editWebLink" recordID="<?=$myWebLinkID?>" />
+                                    </a>
+                                </span>
+                            </li>
+                            <?php
+                                }
+                            ?>
+                        </ul>
+
                     </div>
                     <!--WebLink Ends-->
 
@@ -434,9 +465,21 @@
                 window.location.href = "myPDF";
             });
 
-            //My Web Link
+            //Add Web Link
             $("#myWebLink").click(function() {
                 window.location.href = "myWebLink";
+            });
+
+            //Edit Web Link
+            $("#editWebLink").click(function() {
+                var newID = $(this).attr('recordID');
+                window.location.href = "editWebLink?ID=" + newID;
+            });
+
+            //Delete Web Link
+            $("#delWebLink").click(function() {
+                var newID = $(this).attr('recordID');
+                window.location.href = "deleteWebLink?ID=" + newID;
             });
 
 
