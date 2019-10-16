@@ -2,7 +2,17 @@
     error_reporting(0);
     include_once("config/connection.php");
     include_once("userInfo.php");
+
+    if(!$myEmail)
+    {
+        header("Location: ./");
+    }
+
+    //Count New Inquiries
+    $email_count=mysqli_query($link, "SELECT * FROM freelancer_inquiries WHERE UserID='$userID' AND Status='New'");
+    $email_rows = mysqli_num_rows($email_count);
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -12,6 +22,55 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <?php include_once('scripts/headTags.php') ?>
+
+    <style>
+        .box {
+            border: solid 1px #CCC;
+            font-size: 11pt !important;
+            margin-bottom: 15px;
+        }
+
+        .boxCenter {
+            border-radius: 5px;
+            border: solid 2px #CCC;
+            text-align: center;
+            padding: 10px;
+            font-size: 14pt !important;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #000 !important;
+            font-weight: 600;
+            padding-top: 10px;
+        }
+
+        .myList li {
+            border-bottom: dotted 1px #333;
+            padding: 5px;
+            font-size: 11pt !important;
+        }
+
+        h3 {
+            border-bottom: dotted 1px blue;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .settingIcon {
+            float: right;
+            border: solid 1px #C6C2C1;
+            padding: 5px;
+            border-radius: 3px;
+            background-color: #F5F0EF;
+        }
+
+        .settingIcon:hover {
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -21,80 +80,165 @@
     <!--Nav Ends-->
 
     <!--Main Content Area Starts-->
-    <div style="margin-top:55px"></div>
-    <section class="hero" style="background-image:url(images/profileBg.jpg)">
-        <div class="hero-body">
-            <div class="container" style="text-align:center;">
-                <h1 class="loveTitle" style="color:#333 !important;">
-                    <b><?=$userFullName?></b>
-                </h1>
-            </div>
-        </div>
-    </section>
-
-    <div class="profilePagePic is-hidden-mobile" style="background-image: url(profilePics/<?=$userProfilePic?>);"></div>
-    <div class="profilePagePicMobile is-hidden-desktop" style="background-image: url(profilePics/<?=$userProfilePic?>);"></div>
-
     <section class="section">
-        <div class="columns">
-            <div class="column is-hidden-mobile"></div>
-            <div class="column is-8" style="text-align:center">
-                <h3><?=$userDescription?></h3>
-            </div>
-            <div class="column is-hidden-mobile"></div>
-        </div>
-    </section>
+        <div class="container">
+            <div class="columns" style="margin-top:20px">
+                <div class="column is-one-quarter" style="margin-top:80px;">
+                    <!--Profile Pic Starts-->
+                    <div class="box" style="background-image:url(images/profileBg.jpg); height:180px; text-align:center">
 
+                        <div class="profilePic" style="background-image: url(profilePics/<?=$userProfilePic?>);"></div>
 
-    <section class="hero is-light">
-        <div class="hero-body">
-            <div class="container" style="text-align:center">
-                <h1 class="loveTitle">
-                    If you <span>love</span> us then don’t forget to <span>express</span> it!
-                </h1>
-                <div class="columns">
-                    <div class="column"></div>
-                    <div class="column">
-                        <!--Form Starts-->
-                        <form name="myFormLove" id="myFormLove" method="POST">
-                            <div class="columns">
-                                <div class="column">
-                                    <input type="text" class="input customInput" name="txt_name" id="txt_name" placeholder="Your Name*">
-                                </div>
-                                <div class="column">
-                                    <input type="text" class="input customInput" name="txt_contact" id="txt_contact" placeholder="Email OR Mobile*">
-                                </div>
-                            </div>
-                            <div class="columns">
-                                <div class="column">
-                                    <textarea class="textarea customInput has-fixed-size" name="txt_comment" id="txt_comment" rows="6" cols="50" placeholder="Write your thoughts to motivate us*"></textarea>
-                                </div>
-                            </div>
-                            <div class="columns">
-                                <div class="column">
-                                    <button class="button is-danger is-pulled-right" name="btnSubmit" id="btnSubmit">Submit</button>
-                                </div>
-                            </div>
+                        <h2><?=$userFullName?></h2>
+                        <i style="font-size:11pt; color:#333"><?=$userDesignation?></i>
+                        <br />
+                        <?=$userCity?>
 
-                            <div class="columns">
-                                <div class="column">
-                                    <span id="alert"></span>
-                                </div>
-                            </div>
-                        </form>
-                        <!--Form Ends-->
                     </div>
-                    <div class="column"></div>
+                    <!--Profile Pic Ends-->
+
+                    <!--User Rating Starts-->
+                    <div class="box">
+
+                        <h3 style="text-align:left; font-size:13pt !important">
+                            User Rating
+                            <img src="images/star.png" class="settingIcon" id="myRating" />
+                        </h3>
+                        <img src="images/stars_0.png" style="margin-top:5px;" />
+                    </div>
+                    <!--User Rating Ends-->
+
+                    <!--New Email Starts-->
+                    <div class="box">
+                        <h3 style="text-align:left; font-size:13pt !important">
+                            New Inquiry
+                            <img src="images/envelope.png" class="settingIcon" id="myEmail" />
+                        </h3>
+                        <?php
+                        if($email_rows!=0)
+                        {
+                            ?>
+                        <p style="color:red; font-size:10pt; font-weight:600">You have (<?=$email_rows?>) New Email</p>
+                        <?php
+                        }
+                        else
+                        {
+                            ?>
+                        <p style="font-size:10pt; font-weight:600">No New Email</p>
+                        <?php
+                        }
+                        ?>
+
+                    </div>
+                    <!--New Email Ends-->
+
+                    <!--Skills Start-->
+                    <div class="box">
+
+                        <h3 style="text-align:left; font-size:13pt !important">
+                            My Skills
+                            <img src="images/setting.png" class="settingIcon" id="mySkills" />
+                        </h3>
+                        <ul class="myList">
+                            <li>001</li>
+                            <li>002</li>
+                            <li>003</li>
+                            <li>003</li>
+                            <li>004</li>
+                            <li>005</li>
+                        </ul>
+                    </div>
+                    <!--Skills End-->
+
+                    <!--Languages Start-->
+                    <div class="box">
+                        <h3 style="text-align:left; font-size:13pt !important">
+                            I Can Speak
+                            <img src="images/setting.png" class="settingIcon" id="myLanguages" />
+                        </h3>
+                        <ul class="myList">
+                            <li>001</li>
+                            <li>002</li>
+                            <li>003</li>
+                            <li>003</li>
+                            <li>004</li>
+                            <li>005</li>
+                        </ul>
+                    </div>
+                    <!--Languages End-->
+
+                    <!--Social Media Links Start-->
+                    <div class="box">
+                        <h3 style="text-align:left; font-size:13pt !important">
+                            Follow Me
+                            <img src="images/setting.png" class="settingIcon" id="mySocialMedia" />
+                        </h3>
+                        <ul class="myList">
+                            <li>Facebok</li>
+                            <li>Twitter</li>
+                            <li>Instagram</li>
+                            <li>Linked-in</li>
+                        </ul>
+                    </div>
+                    <!--Social Media Links End-->
+
+                </div>
+                <div class="column">
+                    <div class="box">
+                        <h3 style="text-align:left; font-size:13pt !important">
+                            Profile
+                            <img src="images/setting.png" class="settingIcon" id="myProfile" />
+                        </h3>
+                        <span style="float:right; font-size:10pt; color:#000">
+                            City : <?=$userCity?>
+                        </span>
+                        <br /><br />
+                        <?=$userDescription?>
+                    </div>
+
+                    <!--Services List Starts-->
+                    <div class="box">
+
+                        <img src="images/setting.png" class="settingIcon" id="myServices" />
+
+                        <h3 style="text-align:left; font-size:13pt !important">
+                            Service Title 001
+                        </h3>
+                        <span style="float:right; font-size:11pt; color:#000">
+                            Charges : AED 100
+                        </span>
+                        <br /><br />
+                        <?=$userDescription?>
+
+                        <hr />
+
+                        <h3 style="text-align:left; font-size:13pt !important">
+                            Service Title 001
+                        </h3>
+                        <span style="float:right; font-size:11pt; color:#000">
+                            Charges : AED 100
+                        </span>
+                        <br /><br />
+                        <?=$userDescription?>
+
+                        <hr />
+
+                    </div>
+                    <!--Services List Ends-->
+
+                    <!--User Reviews Start-->
+                    <div class="box">
+                        Reviews
+                    </div>
+                    <!--User Reviews End-->
+
                 </div>
             </div>
+
+
         </div>
     </section>
     <!--Main Content Area Ends-->
-
-
-    <!--Explore Professionals Start-->
-    <?php include_once('exploreProfessionals.php'); ?>
-    <!--Explore Professionals End-->
 
 
     <!--Footer Starts-->
@@ -111,54 +255,52 @@
     <script>
         $(document).ready(function() {
 
-            $("#btnFind").click(function() {
-                $.post("app/findProfile",
-                    $("#myForm").serialize(),
-                    function(data) {
-                        //alert(data);
-                        window.location.href = "searchList?LF=" + data;
-                    });
+            $(" #btnFind").click(function() {
+                $.post("app/findProfile", $("#myForm").serialize(), function(data) {
+                    window.location.href = "searchList?LF=" + data;
+                });
                 return false;
             });
 
-            //Submit Expression
-            $("#btnSubmit").click(function() {
-                $.post("app/motivateUs",
-                    $("#myFormLove").serialize(),
-                    function(data) {
-                        if (data == 'NameEmptyErr') {
-                            $('#alert').text('Please Enter Your Name');
-                            $('#txt_name').val('');
-                        } else if (data == 'NameNumberErr') {
-                            $('#alert').text('Please Enter Only Alphabets');
-                            $('#txt_name').val('');
-                        } else if (data == 'ContactEmptyErr') {
-                            $('#alert').text('Enter either Email OR Mobile');
-                            $('#txt_contact').val('');
-                        } else if (data == 'ContactMobileErr') {
-                            $('#alert').text('Please Check Email ID');
-                        } else if (data == 'ContactEmailErr') {
-                            $('#alert').text('Please Check Email ID');
-                        } else if (data == '1') {
-                            $('#alert').text('Form Submitted Successfully!');
-                            $('#txt_name').val('');
-                            $('#txt_contact').val('');
-                            $('#txt_comment').val('');
-                        } else if (data == '0') {
-                            $('#alert').text('Please check connection!');
-                        }
-
-                        return false;
-                        //window.location.href = "searchList?LF=" + data;
-                    });
-                return false;
+            //My Ratings
+            $("#myRating").click(function() {
+                window.location.href = "myRating";
             });
 
+            //My Email
+            $("#myEmail").click(function() {
+                window.location.href = "myEmail";
+            });
+
+            //My Skills
+            $("#mySkills").click(function() {
+                window.location.href = "mySkills";
+            });
+
+            //My Languages
+            $("#myLanguages").click(function() {
+                window.location.href = "myLanguages";
+            });
+
+            //My Social Media
+            $("#mySocialMedia").click(function() {
+                window.location.href = "mySocialMedia";
+            });
+
+            //My Profile
+            $("#myProfile").click(function() {
+                window.location.href = "myProfile";
+            });
+
+            //My Services
+            $("#myServices").click(function() {
+                window.location.href = "myServices";
+            });
         });
 
     </script>
-
-    <script src="js/mobileMenu.js"></script>
+    <script src="js/mobileMenu.js">
+    </script>
 
 </body>
 

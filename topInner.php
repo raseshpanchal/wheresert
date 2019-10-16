@@ -14,7 +14,7 @@
 
         <div class="navbar-end">
             <div class="navbar-item">
-                <h3>Search profile</h3>
+                <h3 style="border:0; padding-bottom: 0;">Search profile</h3>
                 &nbsp;&nbsp;&nbsp;
                 <form name="myForm" id="myForm" method="POST">
                     <div class="field has-addons">
@@ -29,12 +29,29 @@
             </div>
             <div class="navbar-item">
                 <div class="buttons">
+                    <?php
+                    error_reporting(0);
+                    if($myEmail)
+                    {
+                    ?>
+                    <a href="wheresert-sign-out" class="button is-dark is-outlined">
+                        Sign Out
+                    </a>
+                    <?php
+                    }
+                    else
+                    {
+                    ?>
                     <a href="wheresert-sign-up" class="button is-dark is-outlined">
                         Join Now
                     </a>
                     <a href="wheresert-sign-in" class="button is-primary is-outlined">
                         Sign In
                     </a>
+                    <?php
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>
@@ -58,7 +75,7 @@
 
         <div class="navbar-end">
             <div class="navbar-item">
-                <h3>Search profile</h3>
+                <h3 style="border:0; padding-bottom: 0; text-align:left; margin-bottom: 0;">Search profile</h3>
                 &nbsp;&nbsp;&nbsp;
                 <form name="myFormMobile" id="myFormMobile" method="POST">
                     <div class="field has-addons">
@@ -73,12 +90,28 @@
             </div>
             <div class="navbar-item">
                 <div class="buttons">
+                    <?php
+                    error_reporting(0);
+                    if($myEmail)
+                    {
+                    ?>
+                    <a href="wheresert-sign-out" class="button is-dark is-outlined">
+                        Sign Out
+                    </a>
+                    <?php
+                    }
+                    else
+                    {
+                    ?>
                     <a href="wheresert-sign-up" class="button is-dark is-outlined">
                         Join Now
                     </a>
                     <a href="wheresert-sign-in" class="button is-primary is-outlined">
                         Sign In
                     </a>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>

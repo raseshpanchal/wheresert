@@ -15,12 +15,31 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
+                        <?php
+                    error_reporting(0);
+                    if($myEmail)
+                    {
+                    ?>
+                        <a href="myAccount" class="button is-primary is-outlined">
+                            My Account
+                        </a>
+                        <a href="wheresert-sign-out" class="button is-dark is-outlined">
+                            Sign Out
+                        </a>
+                        <?php
+                    }
+                    else
+                    {
+                    ?>
                         <a href="wheresert-sign-up" class="button is-dark is-outlined">
                             Join Now
                         </a>
                         <a href="wheresert-sign-in" class="button is-primary is-outlined">
                             Sign In
                         </a>
+                        <?php
+                    }
+                    ?>
                     </div>
                 </div>
             </div>

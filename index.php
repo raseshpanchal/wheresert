@@ -1,6 +1,7 @@
 <?php
     error_reporting(0);
     include_once("config/connection.php");
+    include_once("userInfo.php");
 ?>
 <!DOCTYPE html>
 <html>

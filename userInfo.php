@@ -27,7 +27,7 @@ if(!isset($_SESSION))
             $userGender=$view_user['Gender'];
             $userDescription=urldecode($view_user['Description']);
             $userBusinessTitle=$view_user['BusinessTitle'];
-            $userProfessional=$view_user['Professional'];
+            $userDesignation=$view_user['Designation'];
             $userAddress=$view_user['Address'];
             $userCity=$view_user['City'];
             $userState=$view_user['State'];
@@ -52,7 +52,7 @@ if(!isset($_SESSION))
             $userGender=$view_user['Gender'];
             $userDescription=urldecode($view_user['Description']);
             $userBusinessTitle=$view_user['BusinessTitle'];
-            $userProfessional=$view_user['Professional'];
+            $userDesignation=$view_user['Designation'];
             $userAddress=$view_user['Address'];
             $userCity=$view_user['City'];
             $userState=$view_user['State'];

@@ -10,6 +10,11 @@
 
             <div class="columns">
                 <div class="column">
+                    <input type="text" class="input customInput" name="txt_designation" id="txt_designation" placeholder="Designation* (eg. Designer)">
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
                     <input type="text" class="input customInput" name="txt_mobile" id="txt_mobile" placeholder="Contact Number*">
                 </div>
                 <div class="column">
@@ -53,12 +58,13 @@
 
             $('#btnSubmit').attr("disabled", true);
 
+            var newTitle = $('#txt_designation').val();
             var newMobile = $('#txt_mobile').val();
             var newEmail = $('#txt_email').val();
             var newCity = $('#txt_city').val();
             var newState = $('#txt_state').val();
 
-            if (newMobile == '' || newEmail == '' || newCity == '' || newState == '') {
+            if (newTitle == '' || newMobile == '' || newEmail == '' || newCity == '' || newState == '') {
                 $('#alert').html('<span style="color:red">All fields are mandatory!</span>');
             } else {
                 $('#alert').html('<span style="color:#333">Please wait...</span> Processing...');

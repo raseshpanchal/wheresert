@@ -186,6 +186,21 @@ h3 {
     background-size: cover;
 }
 
+.profilePic {
+    /*    position: absolute;*/
+    z-index: 1;
+    margin: auto;
+    margin-top: -100px;
+    /*    margin-left: 20px;*/
+
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    border: solid 3px #FFF;
+    background-position: center center;
+    background-size: cover;
+}
+
 .footerList li {
     font-size: 10pt;
     height: 25px;
