@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2019 at 09:31 AM
+-- Generation Time: Oct 16, 2019 at 09:05 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -40,7 +40,7 @@ CREATE TABLE `freelancer_registration` (
   `ContactMobile` varchar(50) NOT NULL,
   `ContactEmail` varchar(50) NOT NULL,
   `BusinessTitle` varchar(100) NOT NULL,
-  `Professional` varchar(100) NOT NULL,
+  `Designation` varchar(100) NOT NULL,
   `Address` varchar(100) NOT NULL,
   `DOB` varchar(10) NOT NULL,
   `Gender` varchar(10) NOT NULL,
@@ -62,12 +62,12 @@ CREATE TABLE `freelancer_registration` (
 -- Dumping data for table `freelancer_registration`
 --
 
-INSERT INTO `freelancer_registration` (`ID`, `FUID`, `FirstName`, `LastName`, `ProfilePic`, `Code`, `Mobile`, `EmailID`, `ContactMobile`, `ContactEmail`, `BusinessTitle`, `Professional`, `Address`, `DOB`, `Gender`, `Description`, `City`, `State`, `Country`, `ZipCode`, `Password`, `CreateDate`, `CreateTime`, `PaidPhoto`, `PaidBanners`, `PaidListing`, `Status`) VALUES
-(1, '', 'Rajesh', 'Panchal', '1571035777_9820098200.jpg', '', '9820098200', 'rajeshp22@gmail.com', '9870098700', 'thisismyemail@gmail.com', 'IT Studio 22', 'Founder', 'Malbaar Hills', '22/08/1940', 'Male', 'Hello+World%21', 'Dubai', 'Dubai', 'UAE', '400026', '12345', '2019-06-29', '16:20:30', 'No', 'No', 'No', 'Active'),
+INSERT INTO `freelancer_registration` (`ID`, `FUID`, `FirstName`, `LastName`, `ProfilePic`, `Code`, `Mobile`, `EmailID`, `ContactMobile`, `ContactEmail`, `BusinessTitle`, `Designation`, `Address`, `DOB`, `Gender`, `Description`, `City`, `State`, `Country`, `ZipCode`, `Password`, `CreateDate`, `CreateTime`, `PaidPhoto`, `PaidBanners`, `PaidListing`, `Status`) VALUES
+(1, '', 'Rajesh', 'Panchal', '1571035777_9820098200.jpg', '', '9820098200', 'rajeshp22@gmail.com', '9870098700', 'thisismyemail@gmail.com', 'IT Studio 22', 'Fashion Designer', 'Malbaar Hills', '22/08/1940', 'Male', 'Indonesia is in a very active seismic zone, also, but by virtue of its larger size than Japan, it has more total earthquakes. Which country has the most earthquakes per unit area? This would probably be Tonga, Fiji, or Indonesia since they are all in extremely active seismic areas along subduction zones.', 'Dubai', 'Dubai', 'UAE', '400026', '12345', '2019-06-29', '16:20:30', 'No', 'No', 'No', 'Active'),
 (2, '', 'Hassan', 'Alkahily', '559533016_1568013292.png', '+971', '559533016', 'ha@gmail.com', '', '', 'Yearex General Trading LLC', '', '', '09/04/2003', 'Male', 'Lorem+Ipsum+is+simply+dummy+text+of+the+printing+and+typesetting+industry.+Lorem+Ipsum+has+been+the+industry%27s+standard+dummy+text+ever+since+the+1500s', 'Dubai', '', '', '', '12345', '2019-09-04', '14:46:01', 'No', 'No', 'No', 'Active'),
 (3, '', 'Mostafa', 'Awwad', '5554545_1568034474.png', '+971', '5554545', '', '', '', 'Silverline Technologies', '', '', '09/01/2003', 'Male', 'Lorem+Ipsum+is+simply+dummy+text+of+the+printing+and+typesetting+industry.+Lorem+Ipsum+has+been+the+industry%27s+standard+dummy+text+ever+since+the+1500s', 'Dubai', 'Dubai', 'UAE', '', '12345', '2019-09-09', '18:33:45', 'No', 'No', 'No', 'Active'),
 (4, '', 'Mariyam', 'Qaiser', '9890098900_1568116467.png', '+971', '9890098900', '', '', '', 'Yearex', '', '', '09/10/2003', 'Female', 'This+is+something+about+me...', 'Dubai', 'Dubai', 'UAE', '00000', '12345', '2019-09-10', '17:23:24', 'No', 'No', 'No', 'Active'),
-(5, '', 'Tapdnya', 'Panchal', '1571038161_9830098300.jpg', '', '9830098300', '', '9830098300', 'tapodnya@gmail.com', '', '', '', '13/10/2003', 'Male', 'This+is+Tapodnya+Panchal+basically+from+Mumbai+but+now+resides+in+Dubai+since+1910.', 'Dubai', 'Dubai', '', '', '12345', '2019-10-14', '12:55:47', 'No', 'No', 'No', 'Active');
+(5, '', 'Tapodnya', 'Panchal', '1571038161_9830098300.jpg', '', '9830098300', '', '9830098300', 'tapodnya@gmail.com', '', '', '', '13/10/2003', 'Male', 'This+is+Tapodnya+Panchal+basically+from+Mumbai+but+now+resides+in+Dubai+since+1910.', 'Dubai', 'Dubai', '', '', '12345', '2019-10-14', '12:55:47', 'No', 'No', 'No', 'Active');
 
 --
 -- Indexes for dumped tables
