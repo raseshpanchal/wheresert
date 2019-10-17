@@ -390,7 +390,7 @@
                         <img src="images/add-green.png" class="settingIcon" id="myPdf" />
 
                         <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
-                            <strong>Pdf DOCUMENTS</strong>
+                            <strong>PDF DOCUMENTS</strong>
                         </h3>
 
                         <h3 style="text-align:right; font-size:9pt !important; border-bottom:0 !important">
@@ -427,8 +427,8 @@
                                         <?=$myPdfTitle?>
                                     </header>
                                     <div class="card-image">
-                                        <figure class="image is-3by2">
-                                            <img src="userPdfs/<?=$myPdfFileName?>" alt="<?=$myPdfTitle?>">
+                                        <figure class="image is-64x64" style="margin:auto">
+                                            <img src="images/pdf.png" />
                                         </figure>
                                     </div>
                                     <footer class="card-footer" style="padding:5px;">
