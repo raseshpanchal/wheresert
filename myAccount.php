@@ -8,6 +8,11 @@
         header("Location: ./");
     }
 
+    if($userStatus!='Active')
+    {
+        header("Location: freelancer-registration-process");
+    }
+
     //Count New Inquiries
     $email_count=mysqli_query($link, "SELECT * FROM freelancer_inquiries WHERE UserID='$userID' AND Status='New'");
     $email_rows = mysqli_num_rows($email_count);
@@ -232,11 +237,12 @@
                 </div>
                 <div class="column">
                     <div class="box">
-                        <h3 style="text-align:left; font-size:13pt !important">
-                            Profile
-                            <img src="images/setting.png" class="settingIcon" id="myProfile" />
+                        <img src="images/setting.png" class="settingIcon" id="myProfile" />
+                        <h3 style="text-align:left; font-size:13pt !important;">
+                            <strong>PROFILE</strong>
                         </h3>
-                        <span style="float:right; font-size:10pt; color:#000">
+
+                        <span style="float:right; font-size:10pt; color:#000;">
                             City : <?=$userCity?>
                         </span>
                         <br /><br />
@@ -295,10 +301,67 @@
                         <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
                             <strong>PHOTO GALLERY</strong>
                         </h3>
+
+                        <h3 style="text-align:right; font-size:9pt !important; border-bottom:0 !important">
+                            <img src="images/bullet_green.png" align="middle" style="margin-top:-10px" /> Showing Online <img src="images/bullet_gray.png" align="middle" style="margin-top:-10px" /> Not Showing Online
+                        </h3>
+
+                        <!--Images Start-->
+                        <div class="columns is-multiline">
+
+                            <?php
+                            //Fetch User's Photo
+                            $query_photo=mysqli_query($link, "SELECT * FROM  freelancer_upload_images WHERE FreelancerID='$userID'");
+                            while($view_photo=mysqli_fetch_array($query_photo))
+                            {
+                                $myPhotoID=$view_photo['ID'];
+                                $myPhotoTitle=$view_photo['Title'];
+                                $myPhotoFileName=$view_photo['FileName'];
+                                $myPhotoPublish=$view_photo['Publish'];
+
+                                if($myPhotoPublish=='Yes')
+                                {
+                                    $photoPublish='<img src="images/bullet_green.png" alt="Showing Online" />';
+                                } else if($myPhotoPublish=='No')
+                                {
+                                    $photoPublish='<img src="images/bullet_gray.png" alt="Not Showing Online" />';
+                                }
+                            ?>
+
+                            <div class="column is-one-quarter-desktop is-half-tablet">
+                                <div class="card">
+                                    <header class="card-header" style="padding:5px; font-size:9pt">
+                                        <?=$photoPublish?>
+                                        &nbsp;
+                                        <?=$myPhotoTitle?>
+                                    </header>
+                                    <div class="card-image">
+                                        <figure class="image is-3by2">
+                                            <img src="userPhotos/<?=$myPhotoFileName?>" alt="<?=$myPhotoTitle?>">
+                                        </figure>
+                                    </div>
+                                    <footer class="card-footer" style="padding:5px;">
+                                        <a href="#">
+                                            <img src="images/edit.gif" style="margin-right:5px" class="settingIcon myPhotoEdit" ID="<?=$myPhotoID?>" />
+                                        </a>
+                                        <a href="#">
+                                            <img src="images/delete.png" class="settingIcon myPhotoDelete" ID="<?=$myPhotoID?>" />
+                                        </a>
+                                    </footer>
+                                </div>
+                            </div>
+                            <?php
+                            }
+                            ?>
+
+                        </div>
+                        <!--Images End-->
+
                     </div>
                     <!--Photo Gallery Ends-->
 
                     <!--Video Gallery Starts-->
+                    <!--
                     <div class="box">
                         <img src="images/add-green.png" class="settingIcon" id="myVideos" />
 
@@ -306,9 +369,11 @@
                             <strong>VIDEOS</strong>
                         </h3>
                     </div>
+                    -->
                     <!--Video Gallery Ends-->
 
                     <!--Audio Starts-->
+                    <!--
                     <div class="box">
                         <img src="images/add-green.png" class="settingIcon" id="myAudio" />
 
@@ -316,9 +381,11 @@
                             <strong>AUDIO</strong>
                         </h3>
                     </div>
+                    -->
                     <!--Audio Ends-->
 
                     <!--PDF Starts-->
+                    <!--
                     <div class="box">
                         <img src="images/add-green.png" class="settingIcon" id="myPDF" />
 
@@ -326,6 +393,7 @@
                             <strong>PDF DOCUMENTS</strong>
                         </h3>
                     </div>
+                    -->
                     <!--PDF Ends-->
 
                     <!--WebLink Starts-->
@@ -457,6 +525,19 @@
             //My Photos
             $("#myPhotos").click(function() {
                 window.location.href = "myPhotos";
+            });
+
+            //My Photo Edit
+            $(".myPhotoEdit").click(function() {
+
+                var myPhotoID = $(this).attr('ID');
+                window.location.href = "myPhotoEdit?SID=" + myPhotoID;
+            });
+
+            //My Photo Delete
+            $(".myPhotoDelete").click(function() {
+                var myPhotoID = $(this).attr('ID');
+                window.location.href = "myPhotoDelete?SID=" + myPhotoID;
             });
 
             //My Video
