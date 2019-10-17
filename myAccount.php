@@ -373,15 +373,67 @@
                     <!--Video Gallery Ends-->
 
                     <!--Audio Starts-->
-                    <!--
                     <div class="box">
                         <img src="images/add-green.png" class="settingIcon" id="myAudio" />
 
                         <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
-                            <strong>AUDIO</strong>
+                            <strong>AUDIO FILES</strong>
                         </h3>
+                        <h3 style="text-align:right; font-size:9pt !important; border-bottom:0 !important">
+                            <img src="images/bullet_green.png" align="middle" style="margin-top:-10px" /> Showing Online <img src="images/bullet_gray.png" align="middle" style="margin-top:-10px" /> Not Showing Online
+                        </h3>
+
+                        <div class="columns is-multiline">
+
+                            <?php
+                            //Fetch User's Audio
+                            $query_audio=mysqli_query($link, "SELECT * FROM  freelancer_upload_audio WHERE FreelancerID='$userID'");
+                            while($view_audio=mysqli_fetch_array($query_audio))
+                            {
+                                $myAudioID=$view_audio['ID'];
+                                $myAudioTitle=$view_audio['Title'];
+                                $myAudioFileName=$view_audio['FileName'];
+                                $myAudioPublish=$view_audio['Publish'];
+
+                                if($myAudioPublish=='Yes')
+                                {
+                                    $AudioPublish='<img src="images/bullet_green.png" alt="Showing Online" />';
+                                } else if($myAudioPublish=='No')
+                                {
+                                    $AudioPublish='<img src="images/bullet_gray.png" alt="Not Showing Online" />';
+                                }
+                            ?>
+
+                            <div class="column is-one-quarter-desktop is-half-tablet">
+                                <div class="card">
+                                    <header class="card-header" style="padding:5px; font-size:9pt">
+                                        <?=$AudioPublish?>
+                                        &nbsp;
+                                        <?=$myAudioTitle?>
+                                    </header>
+                                    <div class="card-image">
+                                        <audio controls controlsList="nodownload" controls="none" style="width:90%">
+                                            <source src="userAudio/<?=$myAudioFileName?>" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+                                    <footer class="card-footer" style="padding:5px;">
+                                        <a href="#">
+                                            <img src="images/edit.gif" style="margin-right:5px" class="settingIcon myAudioEdit" ID="<?=$myAudioID?>" />
+                                        </a>
+                                        <a href="#">
+                                            <img src="images/delete.png" class="settingIcon myAudioDelete" ID="<?=$myAudioID?>" />
+                                        </a>
+                                    </footer>
+                                </div>
+                            </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+
+
                     </div>
-                    -->
                     <!--Audio Ends-->
 
                     <!--Pdf Starts-->
@@ -426,11 +478,13 @@
                                         &nbsp;
                                         <?=$myPdfTitle?>
                                     </header>
-                                    <div class="card-image">
-                                        <figure class="image is-64x64" style="margin:auto">
-                                            <img src="images/pdf.png" />
-                                        </figure>
-                                    </div>
+                                    <a href="userPDFs/<?=$myPdfFileName?>" target="_blank">
+                                        <div class="card-image">
+                                            <figure class="image is-64x64" style="margin:auto">
+                                                <img src="images/pdf.png" />
+                                            </figure>
+                                        </div>
+                                    </a>
                                     <footer class="card-footer" style="padding:5px;">
                                         <a href="#">
                                             <img src="images/edit.gif" style="margin-right:5px" class="settingIcon myPdfEdit" ID="<?=$myPdfID?>" />
@@ -604,9 +658,17 @@
                 window.location.href = "myAudio";
             });
 
-            //My Audio
-            $("#myAudio").click(function() {
-                window.location.href = "myAudio";
+            //My Audio Edit
+            $(".myAudioEdit").click(function() {
+
+                var $myAudioID = $(this).attr('ID');
+                window.location.href = "myAudioEdit?AID=" + $myAudioID;
+            });
+
+            //My Audio Delete
+            $(".myAudioDelete").click(function() {
+                var $myAudioID = $(this).attr('ID');
+                window.location.href = "myAudioDelete?AID=" + $myAudioID;
             });
 
             //My Pdf
