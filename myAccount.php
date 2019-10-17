@@ -384,17 +384,71 @@
                     -->
                     <!--Audio Ends-->
 
-                    <!--PDF Starts-->
-                    <!--
+                    <!--Pdf Starts-->
+
                     <div class="box">
-                        <img src="images/add-green.png" class="settingIcon" id="myPDF" />
+                        <img src="images/add-green.png" class="settingIcon" id="myPdf" />
 
                         <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
-                            <strong>PDF DOCUMENTS</strong>
+                            <strong>Pdf DOCUMENTS</strong>
                         </h3>
+
+                        <h3 style="text-align:right; font-size:9pt !important; border-bottom:0 !important">
+                            <img src="images/bullet_green.png" align="middle" style="margin-top:-10px" /> Showing Online <img src="images/bullet_gray.png" align="middle" style="margin-top:-10px" /> Not Showing Online
+                        </h3>
+
+                        <!--PDF Start-->
+                        <div class="columns is-multiline">
+
+                            <?php
+                            //Fetch User's PDF
+                            $query_pdf=mysqli_query($link, "SELECT * FROM  freelancer_upload_pdf WHERE FreelancerID='$userID'");
+                            while($view_pdf=mysqli_fetch_array($query_pdf))
+                            {
+                                $myPdfID=$view_pdf['ID'];
+                                $myPdfTitle=$view_pdf['Title'];
+                                $myPdfFileName=$view_pdf['FileName'];
+                                $myPdfPublish=$view_pdf['Publish'];
+
+                                if($myPdfPublish=='Yes')
+                                {
+                                    $PdfPublish='<img src="images/bullet_green.png" alt="Showing Online" />';
+                                } else if($myPdfPublish=='No')
+                                {
+                                    $PdfPublish='<img src="images/bullet_gray.png" alt="Not Showing Online" />';
+                                }
+                            ?>
+
+                            <div class="column is-one-quarter-desktop is-half-tablet">
+                                <div class="card">
+                                    <header class="card-header" style="padding:5px; font-size:9pt">
+                                        <?=$PdfPublish?>
+                                        &nbsp;
+                                        <?=$myPdfTitle?>
+                                    </header>
+                                    <div class="card-image">
+                                        <figure class="image is-3by2">
+                                            <img src="userPdfs/<?=$myPdfFileName?>" alt="<?=$myPdfTitle?>">
+                                        </figure>
+                                    </div>
+                                    <footer class="card-footer" style="padding:5px;">
+                                        <a href="#">
+                                            <img src="images/edit.gif" style="margin-right:5px" class="settingIcon myPdfEdit" ID="<?=$myPdfID?>" />
+                                        </a>
+                                        <a href="#">
+                                            <img src="images/delete.png" class="settingIcon myPdfDelete" ID="<?=$myPdfID?>" />
+                                        </a>
+                                    </footer>
+                                </div>
+                            </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+
                     </div>
-                    -->
-                    <!--PDF Ends-->
+
+                    <!--Pdf Ends-->
 
                     <!--WebLink Starts-->
                     <div class="box">
@@ -555,9 +609,22 @@
                 window.location.href = "myAudio";
             });
 
-            //My PDF
-            $("#myPDF").click(function() {
-                window.location.href = "myPDF";
+            //My Pdf
+            $("#myPdf").click(function() {
+                window.location.href = "myPdf";
+            });
+
+            //My Pdf Edit
+            $(".myPdfEdit").click(function() {
+
+                var $myPdfID = $(this).attr('ID');
+                window.location.href = "myPdfEdit?SID=" + $myPdfID;
+            });
+
+            //My Pdf Delete
+            $(".myPdfDelete").click(function() {
+                var $myPdfID = $(this).attr('ID');
+                window.location.href = "myPdfDelete?SID=" + $myPdfID;
             });
 
             //Add Web Link

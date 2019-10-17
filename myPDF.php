@@ -59,15 +59,22 @@
             cursor: pointer;
         }
 
-        .myList li {
-            border-bottom: dotted 1px #333;
-            padding: 5px;
-            font-size: 11pt !important;
+        #upload-file-container {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            border: dashed 1px #898989;
+            overflow: hidden;
+            margin: 25px auto;
+            background-image: url(images/uploadPhoto.png);
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
-        .myList li span {
-            float: right;
-            font-size: 10pt !important;
+        #upload-file-container input[type="file"] {
+            margin: 0;
+            opacity: 0;
+            font-size: 100px;
         }
 
     </style>
@@ -102,7 +109,7 @@
 
                     <!--Page Title Starts-->
                     <div class="boxTitle">
-                        <h3 class="pageTitle">MY PDF DOCUMENTS
+                        <h3 class="pageTitle">PDF GALLERY
                             <img src="images/home.png" class="settingIcon" id="myHome" />
                         </h3>
                     </div>
@@ -110,14 +117,49 @@
 
                     <!--Services List Starts-->
                     <div class="box">
+                        <form name="myFormPdf" id="myFormPdf" method="POST" enctype="multipart/form-data" action="app/pdfAddFormEntry">
+                            <div class="columns">
+                                <div class="column">
 
-                        <ul class="myList">
-                            <li>001 <span>22/08/2019</span></li>
-                            <li>001</li>
-                            <li>001</li>
-                            <li>001</li>
-                            <li>001</li>
-                        </ul>
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-primary" type="text" name="txt_pdfTitle" id="txt_pdfTitle" placeholder="Enter Title*">
+                                        </div>
+                                    </div>
+
+                                    <div class="field">
+                                        <div class="control">
+                                            <!-- File Input Starts -->
+                                            <div id="upload-file-container">
+                                                <input type="file" name="file" id="file" />
+                                            </div>
+                                            <!-- File Input Ends -->
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="columns">
+
+                                <div class="column">
+                                    <button class="button is-danger is-pulled-right" id="btnUpload" onclick="profilePDF()" style="margin-left:10px">Save</button>
+                                    <a class="button is-dark is-pulled-right btnCancel">Cancel</a>
+
+                                </div>
+
+                            </div>
+
+                            <div class="columns">
+
+                                <div class="column">
+                                    <span id="fileStatus"></span>
+                                </div>
+
+                            </div>
+
+                        </form>
 
                     </div>
                     <!--Services List Ends-->
@@ -156,6 +198,12 @@
             $("#myHome").click(function() {
                 window.location.href = "myAccount";
             });
+
+            //Cancel Button
+            $('.btnCancel').click(function() {
+                window.location.href = "myAccount";
+            });
+
         });
 
     </script>
