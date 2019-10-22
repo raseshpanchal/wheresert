@@ -3,6 +3,12 @@
     include_once("config/connection.php");
     //Get Value
     $keyword=myDecode($_GET['LF']);
+    //Find Skill ID
+    $query_skill=mysqli_query($link, "SELECT * FROM  subcategories WHERE SubCategory LIKE '%$keyword%'");
+    $view_skill=mysqli_fetch_array($query_skill);
+    $mySkillID=$view_skill['ID'];
+    $mySubCategory=$view_skill['SubCategory'];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,6 +19,17 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <?php include_once('scripts/headTags.php') ?>
+
+    <style>
+        h4 {
+            font-size: 12pt !important;
+        }
+
+        .card:hover {
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -24,7 +41,7 @@
     <section class="section" style="margin-top:15px; padding-bottom:0px">
         <div class="container">
             <h1>Search Result</h1>
-            <h3><?=ucwords($keyword)?></h3>
+            <h4>Showing results for <i><b><?=$mySubCategory?></b></i> instead of <i><b><?=ucwords($keyword)?></b></i></h4>
         </div>
     </section>
 
@@ -32,90 +49,63 @@
     <section class="section" style="margin-bottom:50px;">
         <div class="container">
 
-            <div class="columns">
-                <div class="column">
+            <div class="columns is-multiline">
 
-                    <div class="card">
+                <?php
+                $query_pro=mysqli_query($link, "SELECT * FROM  freelancer_skills WHERE SkillID='$mySkillID'");
+                while($view_pro=mysqli_fetch_array($query_pro))
+                {
+                    $myFreelancerID=$view_pro['FreelancerID'];
+
+                    //Fetch Profile Details
+                    $query_proDetails=mysqli_query($link, "SELECT * FROM  freelancer_registration WHERE ID='$myFreelancerID' AND Status='Active'");
+                    $view_proDetails=mysqli_fetch_array($query_proDetails);
+                    $myFirstName=$view_proDetails['FirstName'];
+                    $myLastName=$view_proDetails['LastName'];
+                    $myProfilePic=$view_proDetails['ProfilePic'];
+                    $myCity=$view_proDetails['City'];
+                    $myDescription=urldecode($view_proDetails['Description']);
+                    $myCreateDate=date("M d, Y", strtotime($view_proDetails['CreateDate']));
+                    $myCreateTime=$view_proDetails['CreateTime'];
+
+                    ?>
+                <div class="column is-one-quarter-desktop is-half-tablet">
+
+                    <div class="card" ID="<?=myEncode($myFreelancerID)?>">
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
                                     <figure class="image is-48x48">
-                                        <img class="is-rounded" src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/NafSadh_Profile.jpg/768px-NafSadh_Profile.jpg">
+                                        <img class="is-rounded" src="profilePics/<?=$myProfilePic?>" style="width:48px; height:48px">
                                     </figure>
                                 </div>
                                 <div class="media-content">
-                                    <p class="title is-6">John Smith</p>
-                                    <p class="subtitle is-7">@johnsmith</p>
+                                    <p class="title is-6"><?=$myFirstName?> <?=$myLastName?></p>
+                                    <p class="subtitle is-7"><?=$myCity?></p>
                                 </div>
                             </div>
 
                             <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                                <a href="#">#css</a> <a href="#">#responsive</a>
-                                <br>
-                                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                <p style="height:70px;">
+                                    <?=substr($myDescription, 0, 100)?>
+                                </p>
+                                <small style="float:right">
+                                    User Since
+                                    <time datetime="2016-1-1"><?=$myCreateDate?></time>
+                                </small>
+
                             </div>
                         </div>
                     </div>
 
                 </div>
+                <?php
+                }
+                ?>
 
-                <div class="column">
 
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-left">
-                                    <figure class="image is-48x48">
-                                        <img class="is-rounded" src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/NafSadh_Profile.jpg/768px-NafSadh_Profile.jpg">
-                                    </figure>
-                                </div>
-                                <div class="media-content">
-                                    <p class="title is-6">John Smith</p>
-                                    <p class="subtitle is-7">@johnsmith</p>
-                                </div>
-                            </div>
 
-                            <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                                <a href="#">#css</a> <a href="#">#responsive</a>
-                                <br>
-                                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-
-                <div class="column">
-
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-left">
-                                    <figure class="image is-48x48">
-                                        <img class="is-rounded" src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/NafSadh_Profile.jpg/768px-NafSadh_Profile.jpg">
-                                    </figure>
-                                </div>
-                                <div class="media-content">
-                                    <p class="title is-6">John Smith</p>
-                                    <p class="subtitle is-7">@johnsmith</p>
-                                </div>
-                            </div>
-
-                            <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                                <a href="#">#css</a> <a href="#">#responsive</a>
-                                <br>
-                                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
             </div>
 
 
@@ -178,6 +168,12 @@
                     });
                 return false;
             });
+
+            //Click on Thumbnail
+            $('.card').click(function() {
+                var myID = $(this).attr('ID');
+                window.location.href = "userProfile?ID=" + myID;
+            })
 
         });
 
