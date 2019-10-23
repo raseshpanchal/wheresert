@@ -41,7 +41,21 @@
     <section class="section" style="margin-top:15px; padding-bottom:0px">
         <div class="container">
             <h1>Search Result</h1>
+            <?php
+            if($mySubCategory===ucwords($keyword))
+            {
+                ?>
+            <h4>Showing results for <i><b><?=$mySubCategory?></b></i></h4>
+            <?php
+            }
+            else
+            {
+                ?>
             <h4>Showing results for <i><b><?=$mySubCategory?></b></i> instead of <i><b><?=ucwords($keyword)?></b></i></h4>
+            <?php
+            }
+            ?>
+
         </div>
     </section>
 
@@ -75,8 +89,10 @@
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
-                                    <figure class="image is-48x48">
-                                        <img class="is-rounded" src="profilePics/<?=$myProfilePic?>" style="width:48px; height:48px">
+                                    <figure class="image is-48x48" style="border:solid 1px #CCC; border-radius:48px; background-image:url(profilePics/<?=$myProfilePic?>); background-size:cover">
+                                        <!--
+                                        <img src="" style="width:48px; height:48px">
+                                        -->
                                     </figure>
                                 </div>
                                 <div class="media-content">
