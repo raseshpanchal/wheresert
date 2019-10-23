@@ -1,7 +1,7 @@
 <?php
     error_reporting(0);
     include_once("config/connection.php");
-    //Fetch Profile Info
+   //Fetch Profile Info
     $newID=myDecode($_GET['ID']);
     $query_user=mysqli_query($link, "SELECT * FROM freelancer_registration WHERE ID='$newID'");
     $view_user=mysqli_fetch_array($query_user);
@@ -24,7 +24,7 @@
     $userZipCode=$view_user['ZipCode'];
     $userStatus=$view_user['Status'];
 
-    $mySpeech='Hello! My name is '.$userFirstName.' and I am from '.$userCity.'. Thanks for visiting my profile. '.$userDescription.' Hope you found my profile suitable as per your requirement. Looking forward to hear you soon! Thank you and have a wornderful time.';
+    $mySpeech='Hello! My name is '.$userFirstName.'. And I am from '.$userCity.'. Thanks for visiting my profile. '.$userDescription.' Hope my profile suits your requirements. Looking forward to hear you soon! Thank you and have a wonderful time.';
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +57,6 @@
             color: #000 !important;
             font-weight: 600;
             padding-top: 10px;
-            font-size: 20pt !important;
         }
 
         .myList li {
@@ -131,7 +130,6 @@
                             Listen My Profile
                         </h3>
                         <img src="icons/speak.svg" id="speak" style="margin-top:5px; width:75px;" />
-
 
                     </div>
                     <!--Self Speak Ends-->
@@ -452,20 +450,129 @@
                     </div>
                     <!--WebLink Ends-->
 
-                    <!--User Reviews Start-->
-                    <!--
+                    <!--Contact Starts-->
+                    <div class="box">
+
+                        <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
+                            <strong>Contact <?=$userFullName?></strong>
+                        </h3>
+
+                        <!--PDF Start-->
+                        <form name="myContactForm" id="myContactForm" method="POST">
+                            <input type="hidden" class="input customInput" id="txt_user" name="txt_user" value="<?=$newID?>">
+
+                            <div class="columns">
+                                <div class="column">
+                                    <input type="text" class="input customInput" name="txt_fname" id="txt_fname" placeholder="Your First Name*">
+                                </div>
+                                <div class="column">
+                                    <input type="text" class="input customInput" name="txt_lname" id="txt_lname" placeholder="Your Last Name*">
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <label class="form-check-label">
+                                        Gender
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input type="radio" class="is-checkradio" id="txt_gender" name="txt_gender" value="Male" checked="checked"> Male
+                                    </label>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label class="form-check-label">
+                                        <input type="radio" class="is-checkradio" id="txt_gender" name="txt_gender" value="Female"> Female
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <input type="text" class="input customInput" name="txt_location" id="txt_location" placeholder="Enter City Name*" list="cityList">
+                                    <datalist id="cityList">
+                                        <?php
+                                    //Fetch City List
+                                    $query_city=mysqli_query($link, "SELECT * FROM cities ORDER BY CityName ASC");
+                                    while($view_city=mysqli_fetch_array($query_city))
+                                    {
+                                        $newCityName=$view_city['CityName'];
+                                        ?>
+                                        <option value="<?=$newCityName?>">
+                                            <?php
+                                    }
+                                    ?>
+                                    </datalist>
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <input type="text" class="input customInput" name="txt_number" id="txt_number" placeholder="Contact Number*">
+                                </div>
+                                <div class="column">
+                                    <input type="text" class="input customInput" name="txt_email" id="txt_email" placeholder="Email ID (Optional)">
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <textarea class="textarea customInput has-fixed-size" name="txt_comment" id="txt_comment" rows="6" cols="50" placeholder="Short note..."></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="row" style="padding:5px;">
+                                <div class="col-lg-12">
+                                    Do you want <?=$userFullName?> to&nbsp;&nbsp;&nbsp;
+                                    <label>
+                                        <input type="checkbox" id="check_userpre" name="check_userpre[]" value="PhoneCall" checked="checked"> Call on your Mobile&nbsp;&nbsp;&nbsp;
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" id="check_userpre" name="check_userpre[]" value="SMS/Whatsapp"> SMS/Whatsapp&nbsp;&nbsp;&nbsp;
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" id="check_userpre" name="check_userpre[]" check="check_userpre" value="Email"> Send an Email
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    <button class="button is-danger is-pulled-right" name="btnSend" id="btnSend">Send Inquiry &amp; Create My Account</button>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-lg-12" style="font-size:9pt; text-align:right; padding-top:10px">
+                                    By creating an account you will be able to write reviews, share your experiences, and manage freelancers track.
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column" style="text-align:left; color:red;">
+                                    <span id="contStatus"></span>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="column"></div>
+                </div>
+                <!--Contact Ends-->
+
+
+                <!--User Reviews Start-->
+                <!--
                     <div class="box">
                         Reviews
                     </div>
                     -->
-                    <!--User Reviews End-->
+                <!--User Reviews End-->
 
-                </div>
             </div>
-
-
         </div>
+
     </section>
+
     <!--Main Content Area Ends-->
 
 
@@ -478,9 +585,7 @@
     <!--Copyrights End-->
 
     <?php include_once('scripts/bottomScripts.php') ?>
-
     <script src="js/responsivevoice.js?key=UqfHBIRn"></script>
-
 
     <script>
         $(document).ready(function() {
@@ -507,9 +612,58 @@
                     onend: voiceEndCallback
                 }
 
-                responsiveVoice.speak("<?=$mySpeech?>", "Hindi Female", parameters);
+                <?php
+                if($userGender=='Male')
+                {
+                    ?>
+                responsiveVoice.speak("<?=$mySpeech?>", "UK English Male", parameters);
+                <?php
+                }
+                else if($userGender=='Female')
+                {
+                    ?>
+                responsiveVoice.speak("<?=$mySpeech?>", "UK English Female", parameters);
+                <?php
+                }
+                ?>
+
+
 
             })
+
+            //Save Info
+            $('#btnSend').click(function() {
+                var myFirstName = $('#txt_fname').val();
+                var myLastName = $('#txt_lname').val();
+                var myContactEmail = $('#txt_email').val();
+                var myContactLoc = $('#txt_location').val();
+                var myContactNumber = $('#txt_number').val();
+                $('#btnSend').attr("disabled", true);
+                var myUserPrefrence = $("input[name='check_userpre']:checked").val();
+
+                if (myContactNumber.length < 10) {
+                    $('#contStatus').text('Incorrect Mobile Number');
+                    $('#txt_number').val('');
+                    $('#btnSend').attr("disabled", false);
+                } else {
+                    $.post("app/contactDetailEntry",
+                        $("#myContactForm").serialize(),
+                        function(data) {
+                            if (data == 'regiSuccess') {
+                                $('#txt_fname').val('');
+                                $('#txt_lname').val('');
+                                $('#txt_location').val('');
+                                $('#txt_email').val('');
+                                $('#txt_number').val('');
+                                $('#contStatus').html('<br/>Inquiry has been submitted successfully!<br/>User will contact you at the earliest.');
+                            } else if (data == '0') {
+                                $('#contStatus').html('<span style="color:red">Please check internet connection</span>');
+                            }
+                        });
+                    return false;
+                }
+            });
+
 
 
 
@@ -518,10 +672,6 @@
 
     </script>
     <script src="js/mobileMenu.js">
-    </script>
-
-    <script>
-
     </script>
 
 </body>
