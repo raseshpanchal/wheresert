@@ -23,6 +23,8 @@
     $userCountry=$view_user['Country'];
     $userZipCode=$view_user['ZipCode'];
     $userStatus=$view_user['Status'];
+
+    $mySpeech='Hello! My name is '.$userFirstName.' and I am from '.$userCity.'. Thanks for visiting my profile. '.$userDescription.' Hope you found my profile suitable as per your requirement. Looking forward to hear you soon! Thank you and have a wornderful time.';
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +57,7 @@
             color: #000 !important;
             font-weight: 600;
             padding-top: 10px;
+            font-size: 20pt !important;
         }
 
         .myList li {
@@ -90,6 +93,10 @@
             padding-left: 25px !important;
         }
 
+        #speak:hover {
+            cursor: pointer;
+        }
+
     </style>
 </head>
 
@@ -116,6 +123,18 @@
 
                     </div>
                     <!--Profile Pic Ends-->
+
+                    <!--Self Speak Starts-->
+                    <div class="box" style="text-align:center">
+
+                        <h3 style="text-align:left; font-size:13pt !important">
+                            Listen My Profile
+                        </h3>
+                        <img src="icons/speak.svg" id="speak" style="margin-top:5px; width:75px;" />
+
+
+                    </div>
+                    <!--Self Speak Ends-->
 
                     <!--User Rating Starts-->
                     <div class="box">
@@ -460,6 +479,8 @@
 
     <?php include_once('scripts/bottomScripts.php') ?>
 
+    <script src="js/responsivevoice.js?key=UqfHBIRn"></script>
+
 
     <script>
         $(document).ready(function() {
@@ -471,135 +492,36 @@
                 return false;
             });
 
-            //My Ratings
-            $("#myRating").click(function() {
-                window.location.href = "myRating";
-            });
+            $('#speak').click(function() {
 
-            //My Email
-            $("#myEmail").click(function() {
-                window.location.href = "myEmail";
-            });
+                function voiceStartCallback() {
+                    console.log("Voice started");
+                }
 
-            //My Skills
-            $("#mySkills").click(function() {
-                window.location.href = "mySkills";
-            });
+                function voiceEndCallback() {
+                    console.log("Voice ended");
+                }
 
-            //My Languages
-            $("#myLanguages").click(function() {
-                window.location.href = "myLanguages";
-            });
+                var parameters = {
+                    onstart: voiceStartCallback,
+                    onend: voiceEndCallback
+                }
 
-            //My Social Media
-            $("#mySocialMedia").click(function() {
-                window.location.href = "mySocialMedia";
-            });
+                responsiveVoice.speak("<?=$mySpeech?>", "Hindi Female", parameters);
 
-            //My Profile
-            $("#myProfile").click(function() {
-                window.location.href = "myProfile";
-            });
+            })
 
-            //My Services
-            $("#myServices").click(function() {
-                window.location.href = "myServices";
-            });
 
-            //My Services Edit
-            $(".myServicesEdit").click(function() {
-
-                var myServID = $(this).attr('id');
-                window.location.href = "myServicesEdit?SID=" + myServID;
-            });
-
-            //My Services Delete
-            $(".myServicesDelete").click(function() {
-                var myServID = $(this).attr('id');
-                window.location.href = "myServicesDelete?SID=" + myServID;
-            });
-
-            //My Photos
-            $("#myPhotos").click(function() {
-                window.location.href = "myPhotos";
-            });
-
-            //My Photo Edit
-            $(".myPhotoEdit").click(function() {
-
-                var myPhotoID = $(this).attr('ID');
-                window.location.href = "myPhotoEdit?SID=" + myPhotoID;
-            });
-
-            //My Photo Delete
-            $(".myPhotoDelete").click(function() {
-                var myPhotoID = $(this).attr('ID');
-                window.location.href = "myPhotoDelete?SID=" + myPhotoID;
-            });
-
-            //My Video
-            $("#myVideos").click(function() {
-                window.location.href = "myVideos";
-            });
-
-            //My Audio
-            $("#myAudio").click(function() {
-                window.location.href = "myAudio";
-            });
-
-            //My Audio Edit
-            $(".myAudioEdit").click(function() {
-
-                var $myAudioID = $(this).attr('ID');
-                window.location.href = "myAudioEdit?AID=" + $myAudioID;
-            });
-
-            //My Audio Delete
-            $(".myAudioDelete").click(function() {
-                var $myAudioID = $(this).attr('ID');
-                window.location.href = "myAudioDelete?AID=" + $myAudioID;
-            });
-
-            //My Pdf
-            $("#myPdf").click(function() {
-                window.location.href = "myPdf";
-            });
-
-            //My Pdf Edit
-            $(".myPdfEdit").click(function() {
-
-                var $myPdfID = $(this).attr('ID');
-                window.location.href = "myPdfEdit?SID=" + $myPdfID;
-            });
-
-            //My Pdf Delete
-            $(".myPdfDelete").click(function() {
-                var $myPdfID = $(this).attr('ID');
-                window.location.href = "myPdfDelete?SID=" + $myPdfID;
-            });
-
-            //Add Web Link
-            $("#myWebLink").click(function() {
-                window.location.href = "myWebLink";
-            });
-
-            //Edit Web Link
-            $("#editWebLink").click(function() {
-                var newID = $(this).attr('recordID');
-                window.location.href = "editWebLink?ID=" + newID;
-            });
-
-            //Delete Web Link
-            $("#delWebLink").click(function() {
-                var newID = $(this).attr('recordID');
-                window.location.href = "deleteWebLink?ID=" + newID;
-            });
 
 
         });
 
     </script>
     <script src="js/mobileMenu.js">
+    </script>
+
+    <script>
+
     </script>
 
 </body>
