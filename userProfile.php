@@ -553,21 +553,94 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
-                    <div class="column"></div>
-                </div>
-                <!--Contact Ends-->
+
+                    <!--Contact Ends-->
 
 
-                <!--User Reviews Start-->
-                <!--
+                    <!--User Reviews Start-->
+
                     <div class="box">
-                        Reviews
-                    </div>
-                    -->
-                <!--User Reviews End-->
+                        <div class="columns">
+                            <div class="column">
+                                REVIEWS
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column showReviews">
+                                Reviews Display Here!
+                            </div>
+                        </div>
 
+
+
+                        <div class="columns">
+                            <div class="column">
+                                <?php
+                                if(!$myEmail){
+                                    ?>
+                                <button class="button is-primary" id="btnLogin" style="float:right">Login to write review</button>
+                                <?php
+                                } else {
+                                    ?>
+                                <div class="box">
+                                    <form name="myReviewForm" id="myReviewForm" method="POST">
+                                        <input type="hidden" class="input customInput" id="txt_revUser" name="txt_revUser" value="<?=$newID?>">
+                                        <input type="hidden" class="input customInput" id="txt_revName" name="txt_revName" value="<?=$userFullName?>">
+                                        <input type="hidden" class="input customInput" id="txt_revEmail" name="txt_revEmail" value="<?=$userEmailID?>">
+                                        <input type="hidden" class="input customInput" id="txt_revMobile" name="txt_revMobile" value="<?=$userMobile?>">
+
+                                        <div class="columns">
+                                            <div class="column">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        <textarea class="textarea customInput has-fixed-size" name="txt_review" id="txt_review" rows="5" cols="50" placeholder="Write review...."></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="columns">
+                                            <div class="column">
+                                                <div class="field">
+                                                    <div class="control has-icons-left">
+                                                        <div class="select">
+                                                            <select id="starRating">
+                                                                <option value="1">Rating &#128954;</option>
+                                                                <option value="2">Rating &#128954;&#128954;</option>
+                                                                <option value="3" selected>Rating &#128954;&#128954;&#128954;</option>
+                                                                <option value="4">Rating &#128954;&#128954;&#128954;&#128954;</option>
+                                                                <option value="5">Rating &#128954;&#128954;&#128954;&#128954;&#128954;</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="column" style="text-align:right">
+                                                <div class="buttons">
+                                                    <button class="button is-primary" id="btnCancelReview" name="btnCancelReview">Cancel</button>
+                                                    <button class="button is-link" id="btnSendReview" name="btnSendReview">Submit Review</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </form>
+                                </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--User Reviews End-->
+
+                </div>
             </div>
         </div>
 
@@ -664,6 +737,38 @@
                 }
             });
 
+
+            //Load Reviews
+            $('.showReviews').load('reviewShow?ID=<?=$profileID?>');
+
+            //Take User to Login
+            $('#btnLogin').click(function() {
+                window.location.href = "wheresert-sign-in";
+            });
+
+            //Write Review
+            //Save Info
+            $('#btnSendReview').click(function() {
+                var myRevName = $('#txt_revUser').val();
+                var myRevEmail = $('#txt_revEmail').val();
+                var myRevReview = $('#txt_review').val();
+                var myRevRating = $('#starRating').find(":selected").val();
+
+                if (myRevReview != '' || myRevRating != '') {
+                    $.post("app/reviewWriteFormEntry?RT=" + myRevRating,
+                        $("#myReviewForm").serialize(),
+                        function(data) {
+                            if (data == '1') {
+                                $('.btnReview').attr("disabled", false);
+                            }
+                            if (data == '0') {
+                                alert('Error occured!');
+                                $('.btnReview').attr("disabled", false);
+                            }
+                        });
+                }
+                return false;
+            });
 
 
 
