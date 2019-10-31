@@ -64,6 +64,18 @@ if($checkUser==1)
                     $_SESSION['whrsrtfruser']=$myUser;
                     echo 'validWizard04';
                 }
+                else if($newValid=='Wizard05')
+                {
+                    //Valid User Process to incomplete wizard
+                    $_SESSION['whrsrtfruser']=$myUser;
+                    echo 'validWizard05';
+                }
+                else if($newValid=='Wizard06')
+                {
+                    //Valid User Process to incomplete wizard
+                    $_SESSION['whrsrtfruser']=$myUser;
+                    echo 'validWizard06';
+                }
                 else if($newValid=='Active')
                 {
                     //Valid User

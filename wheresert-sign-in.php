@@ -248,6 +248,16 @@
                                         $('#login_user').val('');
                                         $('#login_pass').val('');
                                         window.location.href = 'freelancer-registration-process';
+                                    } else if (data == 'validWizard05') {
+                                        $('#loginStatus').html('<span style="color:green">Account Athenticated. Please wait...</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        window.location.href = 'freelancer-registration-process';
+                                    } else if (data == 'validWizard06') {
+                                        $('#loginStatus').html('<span style="color:green">Account Athenticated. Please wait...</span>').fadeIn(300);
+                                        $('#login_user').val('');
+                                        $('#login_pass').val('');
+                                        window.location.href = 'freelancer-registration-process';
                                     } else if (data == 'validUser') {
                                         $('#loginStatus').html('<span style="color:green">Account Athenticated. Please wait...</span>').fadeIn(300);
                                         $('#login_user').val('');
