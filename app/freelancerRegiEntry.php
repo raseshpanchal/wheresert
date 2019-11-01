@@ -1,5 +1,6 @@
 <?php
 
+    session_start();
     include_once("../config/connection.php");
 
     //Check Existing Records
@@ -9,7 +10,7 @@
     {
         //Check Mobile Number Validation
         $checkMobile=$_POST["txt_contact"];
-        
+
         if(!preg_match('/^[0-9]{10}+$/', $checkMobile))
         {
             echo 'InvalidMobile';
@@ -23,17 +24,17 @@
 
             if($queryCountMobile!=0)
             {
-            //Mobile Number is Already Used
-            echo 'MobileRepeat';
+                //Mobile Number is Already Used
+                echo 'MobileRepeat';
             }
             else
             {
-            //Mobile Number New Entry
-            //Check First Name
-            if(empty($_POST["txt_fname"]))
-            {
-            echo 'FNameEmptyErr';
-            }
+                //Mobile Number New Entry
+                //Check First Name
+                if(empty($_POST["txt_fname"]))
+                {
+                    echo 'FNameEmptyErr';
+                }
             else
             {
             //Check First Name String
@@ -76,24 +77,25 @@
             $userYY=$_GET['YY'];
             $userBOD=$userDD.'/'.$userMM.'/'.$userYY;
 
-            //Insert Into DB
-            $query_1=mysqli_query($link, "INSERT INTO freelancer_registration SET FirstName='$newFName', LastName='$newLName', Mobile='$newContact', DOB='$userBOD', Gender='$newGender', Password='$newPass', CreateDate=now(), CreateTime=now(), PaidPhoto='No', PaidBanners='No', PaidListing='No', Status='Wizard'");
-            if($query_1)
-            {
-            echo '1';
-            }
-            else
-            {
-            echo '0';
-            }
+                //Insert Into DB
+                $query_1=mysqli_query($link, "INSERT INTO freelancer_registration SET FirstName='$newFName', LastName='$newLName', Mobile='$newContact', DOB='$userBOD', Gender='$newGender', Password='$newPass', CreateDate=now(), CreateTime=now(), PaidPhoto='No', PaidBanners='No', PaidListing='No', Status='Wizard'");
+                if($query_1)
+                {
+                    $_SESSION['whrsrtfruser']=$newContact;
+                    echo '1';
+                }
+                else
+                {
+                    echo '0';
+                }
             }
             }
             }
             }
             }
         //Mobile Validation Ends
-        }        
-        
+        }
+
     }
     else
     {
@@ -101,7 +103,7 @@
         $checkEmail=$_POST["txt_contact"];
         $queryFindEmail = mysqli_query($link,"SELECT * FROM freelancer_registration WHERE EmailID='$checkEmail'");
         $queryCountEmail = mysqli_num_rows($queryFindEmail);
-        
+
         if($queryCountEmail!=0)
         {
             //Email ID is Already Used
@@ -156,11 +158,12 @@
                             $userMM=$_GET['MM'];
                             $userYY=$_GET['YY'];
                             $userBOD=$userDD.'/'.$userMM.'/'.$userYY;
-                            
+
                             //Insert Into DB
                             $query_1=mysqli_query($link, "INSERT INTO freelancer_registration SET FirstName='$newFName', LastName='$newLName', EmailID='$newContact', DOB='$userBOD', Gender='$newGender', Password='$newPass', CreateDate=now(), CreateTime=now(), PaidPhoto='No', PaidBanners='No', PaidListing='No', Status='Wizard'");
                             if($query_1)
                             {
+                                $_SESSION['whrsrtfruser']=$newContact;
                                 echo '1';
                             }
                             else

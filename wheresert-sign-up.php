@@ -309,6 +309,7 @@
                                     $('#txt_lname').val('');
                                     $('#txt_contact').val('');
                                     $('#txt_pass').val('');
+                                    window.location.href = 'freelancer-registration-process';
                                 } else if (data == '0') {
                                     $('#alert').text('Please check connection!');
                                 }
@@ -360,7 +361,7 @@
                 //Regi Function Ends
             });
 
-            //MAIN ENDS    
+            //MAIN ENDS
         });
 
     </script>
