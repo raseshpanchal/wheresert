@@ -9,6 +9,7 @@
     $userFirstName=$view_user['FirstName'];
     $userLastName=$view_user['LastName'];
     $userFullName=$userFirstName.' '.$userLastName;
+    $userProfileName=urldecode($view_user['ProfileName']);
     $userProfilePic=$view_user['ProfilePic'];
     $userDOB=$view_user['DOB'];
     $userMobile=$view_user['Mobile'];
@@ -17,7 +18,7 @@
     $userDescription=urldecode($view_user['Description']);
     $userBusinessTitle=$view_user['BusinessTitle'];
     $userDesignation=$view_user['Designation'];
-    $userAddress=$view_user['Address'];
+    $userAddress=urldecode($view_user['Address']);
     $userCity=$view_user['City'];
     $userState=$view_user['State'];
     $userCountry=$view_user['Country'];
@@ -25,6 +26,24 @@
     $userStatus=$view_user['Status'];
 
     $mySpeech='Hello! My name is '.$userFirstName.'. And I am from '.$userCity.'. Thanks for visiting my profile. '.$userDescription.' Hope my profile suits your requirements. Looking forward to hear you soon! Thank you and have a wonderful time.';
+
+
+    //Photo Count
+    $photoCount = mysqli_query($link, "SELECT * FROM freelancer_upload_images WHERE FreelancerID='$userID'");
+    $numPhoto = mysqli_num_rows($photoCount);
+
+    //Audio Count
+    $audioCount = mysqli_query($link, "SELECT * FROM freelancer_upload_audio WHERE FreelancerID='$userID'");
+    $numAudio = mysqli_num_rows($audioCount);
+
+    //PDF Count
+    $pdfCount = mysqli_query($link, "SELECT * FROM freelancer_upload_pdf WHERE FreelancerID='$userID'");
+    $numPDF = mysqli_num_rows($pdfCount);
+
+    //External Links Count
+    $linkCount = mysqli_query($link, "SELECT * FROM freelancer_upload_weblink WHERE FreelancerID='$userID'");
+    $numLink = mysqli_num_rows($linkCount);
+
 ?>
 
 <!DOCTYPE html>
@@ -115,7 +134,7 @@
 
                         <div class="profilePic" style="background-image: url(profilePics/<?=$userProfilePic?>);"></div>
 
-                        <h2><?=$userFullName?></h2>
+                        <h2 style="font-size:14pt !important"><?=$userFullName?></h2>
                         <i style="font-size:11pt; color:#333"><?=$userDesignation?></i>
                         <br />
                         <?=$userCity?>
@@ -124,6 +143,7 @@
                     <!--Profile Pic Ends-->
 
                     <!--Self Speak Starts-->
+                    <!--
                     <div class="box" style="text-align:center">
 
                         <h3 style="text-align:left; font-size:13pt !important">
@@ -132,6 +152,7 @@
                         <img src="icons/speak.svg" id="speak" style="margin-top:5px; width:75px;" />
 
                     </div>
+                    -->
                     <!--Self Speak Ends-->
 
                     <!--User Rating Starts-->
@@ -233,23 +254,19 @@
                 </div>
                 <div class="column">
                     <div class="box">
-                        <h3 style="text-align:left; font-size:13pt !important;">
-                            <strong>PROFILE</strong>
+                        <h3 style="text-align:left; font-size:15pt !important;">
+                            <strong><?=strtoupper($userProfileName)?></strong>
                         </h3>
 
                         <span style="float:right; font-size:10pt; color:#000;">
-                            City : <?=$userCity?>
+                            <img src="images/mapLocation.png" /> <?=$userAddress.', '.$userCity?>
                         </span>
                         <br /><br />
-                        <?=$userDescription?>
+                        <span style="font-style: italic;"><?=$userDescription?></span>
                     </div>
 
                     <!--Services List Starts-->
                     <div class="box">
-
-                        <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
-                            <strong>LIST OF SERVICES</strong>
-                        </h3>
 
                         <?php
                         //Fetch User's Services
@@ -262,9 +279,10 @@
                             $myServicePrice=$view_service['Price'];
                             $myServiceDesc=urldecode($view_service['Description']);
                             ?>
-                        <h3 style="text-align:left; font-size:13pt !important">
-                            <?=$myServiceTitle?>
+                        <h3 style="text-align:left; font-size:13pt !important;">
+                            <strong><?=strtoupper($myServiceTitle)?></strong>
                         </h3>
+
                         <span style="float:right; font-size:11pt; color:#C00">
                             Charges : <?=$myServiceCurrency?> <?=$myServicePrice?>
                         </span>
@@ -278,6 +296,10 @@
                     </div>
                     <!--Services List Ends-->
 
+                    <?php
+                    if($numPhoto!=0)
+                    {
+                        ?>
                     <!--Photo Gallery Starts-->
                     <div class="box">
 
@@ -289,21 +311,23 @@
                         <div class="columns is-multiline">
 
                             <?php
-                            //Fetch User's Photo
-                            $query_photo=mysqli_query($link, "SELECT * FROM  freelancer_upload_images WHERE FreelancerID='$userID'");
-                            while($view_photo=mysqli_fetch_array($query_photo))
-                            {
-                                $myPhotoID=$view_photo['ID'];
-                                $myPhotoTitle=$view_photo['Title'];
-                                $myPhotoFileName=$view_photo['FileName'];
-                                $myPhotoPublish=$view_photo['Publish'];
-                            ?>
+                                //Fetch User's Photo
+                                $query_photo=mysqli_query($link, "SELECT * FROM  freelancer_upload_images WHERE FreelancerID='$userID'");
+                                while($view_photo=mysqli_fetch_array($query_photo))
+                                {
+                                    $myPhotoID=$view_photo['ID'];
+                                    $myPhotoTitle=$view_photo['Title'];
+                                    $myPhotoFileName=$view_photo['FileName'];
+                                    $myPhotoPublish=$view_photo['Publish'];
+                                ?>
 
                             <div class="column is-one-quarter-desktop is-half-tablet">
                                 <div class="card">
                                     <div class="card-image">
                                         <figure class="image is-3by2">
-                                            <img src="userPhotos/<?=$myPhotoFileName?>" alt="<?=$myPhotoTitle?>">
+                                            <a href="userPhotos/<?=$myPhotoFileName?>" target="_blank">
+                                                <img src="userPhotos/<?=$myPhotoFileName?>" alt="<?=$myPhotoTitle?>">
+                                            </a>
                                         </figure>
                                     </div>
                                     <footer class="card-footer" style="padding:5px; font-size:9pt">
@@ -312,14 +336,18 @@
                                 </div>
                             </div>
                             <?php
-                            }
-                            ?>
+                                }
+                                ?>
 
                         </div>
                         <!--Images End-->
 
                     </div>
                     <!--Photo Gallery Ends-->
+                    <?php
+                    }
+                    ?>
+
 
                     <!--Video Gallery Starts-->
                     <!--
@@ -333,6 +361,11 @@
                     -->
                     <!--Video Gallery Ends-->
 
+
+                    <?php
+                    if($numAudio!=0)
+                    {
+                        ?>
                     <!--Audio Starts-->
                     <div class="box">
 
@@ -343,15 +376,15 @@
                         <div class="columns is-multiline">
 
                             <?php
-                            //Fetch User's Audio
-                            $query_audio=mysqli_query($link, "SELECT * FROM  freelancer_upload_audio WHERE FreelancerID='$userID'");
-                            while($view_audio=mysqli_fetch_array($query_audio))
-                            {
-                                $myAudioID=$view_audio['ID'];
-                                $myAudioTitle=$view_audio['Title'];
-                                $myAudioFileName=$view_audio['FileName'];
-                                $myAudioPublish=$view_audio['Publish'];
-                            ?>
+                                //Fetch User's Audio
+                                $query_audio=mysqli_query($link, "SELECT * FROM  freelancer_upload_audio WHERE FreelancerID='$userID'");
+                                while($view_audio=mysqli_fetch_array($query_audio))
+                                {
+                                    $myAudioID=$view_audio['ID'];
+                                    $myAudioTitle=$view_audio['Title'];
+                                    $myAudioFileName=$view_audio['FileName'];
+                                    $myAudioPublish=$view_audio['Publish'];
+                                ?>
 
                             <div class="column is-one-quarter-desktop is-half-tablet">
                                 <div class="card">
@@ -367,16 +400,24 @@
                                 </div>
                             </div>
                             <?php
-                            }
-                            ?>
+                                }
+                                ?>
                         </div>
 
 
                     </div>
                     <!--Audio Ends-->
+                    <?php
+                    }
+                    ?>
 
+
+
+                    <?php
+                    if($numPDF!=0)
+                    {
+                        ?>
                     <!--Pdf Starts-->
-
                     <div class="box">
 
                         <h3 style="text-align:left; font-size:13pt !important; border-bottom:0 !important">
@@ -387,15 +428,15 @@
                         <div class="columns is-multiline">
 
                             <?php
-                            //Fetch User's PDF
-                            $query_pdf=mysqli_query($link, "SELECT * FROM  freelancer_upload_pdf WHERE FreelancerID='$userID'");
-                            while($view_pdf=mysqli_fetch_array($query_pdf))
-                            {
-                                $myPdfID=$view_pdf['ID'];
-                                $myPdfTitle=$view_pdf['Title'];
-                                $myPdfFileName=$view_pdf['FileName'];
-                                $myPdfPublish=$view_pdf['Publish'];
-                            ?>
+                                //Fetch User's PDF
+                                $query_pdf=mysqli_query($link, "SELECT * FROM  freelancer_upload_pdf WHERE FreelancerID='$userID'");
+                                while($view_pdf=mysqli_fetch_array($query_pdf))
+                                {
+                                    $myPdfID=$view_pdf['ID'];
+                                    $myPdfTitle=$view_pdf['Title'];
+                                    $myPdfFileName=$view_pdf['FileName'];
+                                    $myPdfPublish=$view_pdf['Publish'];
+                                ?>
 
                             <div class="column is-one-quarter-desktop is-half-tablet">
                                 <div class="card">
@@ -412,14 +453,21 @@
                                 </div>
                             </div>
                             <?php
-                            }
-                            ?>
+                                }
+                                ?>
                         </div>
 
                     </div>
-
                     <!--Pdf Ends-->
+                    <?php
+                    }
+                    ?>
 
+
+                    <?php
+                    if($numLink!=0)
+                    {
+                        ?>
                     <!--WebLink Starts-->
                     <div class="box">
 
@@ -429,26 +477,30 @@
 
                         <ul class="myList">
                             <?php
-                                //Fetch User's WebLink
-                                $query_weblink=mysqli_query($link, "SELECT * FROM freelancer_upload_weblink WHERE FreelancerID='$userID'");
-                                while($view_weblink=mysqli_fetch_array($query_weblink))
-                                {
-                                    $myWebLinkID=$view_weblink['ID'];
-                                    $myWebLinkTitle=$view_weblink['Title'];
-                                    $myWebLinkURL=$view_weblink['URL'];
-                                    ?>
+                                    //Fetch User's WebLink
+                                    $query_weblink=mysqli_query($link, "SELECT * FROM freelancer_upload_weblink WHERE FreelancerID='$userID'");
+                                    while($view_weblink=mysqli_fetch_array($query_weblink))
+                                    {
+                                        $myWebLinkID=$view_weblink['ID'];
+                                        $myWebLinkTitle=$view_weblink['Title'];
+                                        $myWebLinkURL=$view_weblink['URL'];
+                                        ?>
                             <li class="listTick">
                                 <a href="<?=$myWebLinkURL?>" target="_blank" style="color:#000">
                                     <?=$myWebLinkTitle?>
                                 </a>
                             </li>
                             <?php
-                                }
-                            ?>
+                                    }
+                                ?>
                         </ul>
 
                     </div>
                     <!--WebLink Ends-->
+                    <?php
+                    }
+                    ?>
+
 
                     <!--Contact Starts-->
                     <div class="box">
@@ -568,7 +620,7 @@
                         </div>
                         <div class="columns">
                             <div class="column showReviews">
-                                Reviews Display Here!
+                                <!--Reviews Display Here!-->
                             </div>
                         </div>
 

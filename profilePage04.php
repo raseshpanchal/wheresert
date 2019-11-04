@@ -10,6 +10,11 @@
 
             <div class="columns">
                 <div class="column">
+                    <input type="text" class="input customInput" name="txt_profile" id="txt_profile" placeholder="Profile Name* (eg. Your Name OR Business)">
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
                     <input type="text" class="input customInput" name="txt_designation" id="txt_designation" placeholder="Designation* (eg. Designer)">
                 </div>
             </div>
@@ -23,10 +28,15 @@
             </div>
             <div class="columns">
                 <div class="column">
+                    <input type="text" class="input customInput" name="txt_address" id="txt_address" placeholder="Address*">
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
                     <input type="text" class="input customInput" name="txt_city" id="txt_city" placeholder="City Name*">
                 </div>
                 <div class="column">
-                    <input type="text" class="input customInput" name="txt_state" id="txt_state" placeholder="State Name*">
+                    <input type="text" class="input customInput" name="txt_state" id="txt_state" placeholder="State Name">
                 </div>
             </div>
 
@@ -58,13 +68,12 @@
 
             $('#btnSubmit').attr("disabled", true);
 
-            var newTitle = $('#txt_designation').val();
+            var newDesignation = $('#txt_designation').val();
             var newMobile = $('#txt_mobile').val();
             var newEmail = $('#txt_email').val();
             var newCity = $('#txt_city').val();
-            var newState = $('#txt_state').val();
 
-            if (newTitle == '' || newMobile == '' || newEmail == '' || newCity == '' || newState == '') {
+            if (newDesignation == '' || newMobile == '' || newEmail == '' || newCity == '') {
                 $('#alert').html('<span style="color:red">All fields are mandatory!</span>');
             } else {
                 $('#alert').html('<span style="color:#333">Please wait...</span> Processing...');
